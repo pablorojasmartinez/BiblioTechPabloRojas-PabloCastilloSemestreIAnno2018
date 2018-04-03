@@ -19,13 +19,13 @@ import java.util.List;
  * 
  * @author Pablo Rojas Martínez
  */
-public class ArchivoEstudiante {
+public class StudentFile {
  private RandomAccessFile randomAccessFile;
     private int cantidadRegistros;
     private int tamRegistro;
     private String path;
 
-    public ArchivoEstudiante() throws IOException {
+    public StudentFile() throws IOException {
 
         this.path = "archivoEstudiante";
         File file = new File(this.path);
@@ -94,12 +94,13 @@ public class ArchivoEstudiante {
 
         return null;
     } // obtenerPersona
+    
 
     public String primeraLetra(Student estudiante) {
-        if (estudiante.getId().getCareer().equalsIgnoreCase("Informática")) {
-            return "I";
+        if (estudiante.getId().getCareer().equalsIgnoreCase("Computing")) {
+            return "C";
 
-        } else if (estudiante.getId().getCareer().equalsIgnoreCase("Agronomía")) {
+        } else if (estudiante.getId().getCareer().equalsIgnoreCase("Agronomy")) {
             return "A";
         } else {
             return "E";
@@ -234,4 +235,26 @@ String numer=numero(numUltimo);
     }
      return false;
     }
+        
+        
+        public Student obtenerEstudiante(String carnet) throws IOException{
+            Student student = null;
+        for (int i = 0; i < this.cantidadRegistros; i++) {
+            Student productoActual = obtenerProducto(i);
+            if (productoActual != null) {
+               if(productoActual.getId().getChain().equals(carnet)){
+                  
+               //result=true;
+//               }else{
+//               //result=false;
+//               }
+               student=productoActual;
+  
+               }
+            
+            }}
+
+        return student;
+        }
+        
 }

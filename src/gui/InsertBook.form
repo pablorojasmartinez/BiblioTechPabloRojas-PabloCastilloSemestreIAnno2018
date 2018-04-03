@@ -63,7 +63,7 @@
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="223" max="32767" attributes="0"/>
+              <EmptySpace pref="210" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -101,17 +101,17 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Tipo:"/>
+        <Property name="text" type="java.lang.String" value="Type"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nombre:"/>
+        <Property name="text" type="java.lang.String" value="Name"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Cantidad:"/>
+        <Property name="text" type="java.lang.String" value="Amount"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
@@ -124,8 +124,11 @@
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="F&#xed;sico"/>
+        <Property name="text" type="java.lang.String" value="Physical"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioFisicoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioDigital">
       <Properties>
@@ -162,12 +165,12 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="6">
-            <StringItem index="0" value="Salud"/>
-            <StringItem index="1" value="Historia"/>
-            <StringItem index="2" value="Geograf&#xed;a"/>
-            <StringItem index="3" value="Ciencia"/>
-            <StringItem index="4" value="Tecnolog&#xed;a"/>
-            <StringItem index="5" value="Educaci&#xf3;n"/>
+            <StringItem index="0" value="Health"/>
+            <StringItem index="1" value="History"/>
+            <StringItem index="2" value="Geography"/>
+            <StringItem index="3" value="Science"/>
+            <StringItem index="4" value="Technology"/>
+            <StringItem index="5" value="Education"/>
           </StringArray>
         </Property>
       </Properties>
@@ -177,7 +180,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Insertar"/>
+        <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>

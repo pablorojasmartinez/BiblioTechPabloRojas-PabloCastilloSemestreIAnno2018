@@ -24,11 +24,11 @@ import java.util.List;
  *
  * @author Pablo Castillo
  */
-public class ArchivoPrestamos {
+public class LoanFile {
 
     private String path;
 
-    public ArchivoPrestamos() {
+    public LoanFile() {
         this.path = "ArchivoPrestamos";
     }
 

@@ -5,9 +5,9 @@
  */
 package gui;
 
-import gui.InsertarLibros;
-import gui.InsertarAudioVisuales;
-import gui.MostrarLibros;
+import gui.InsertBook;
+import gui.InsertAudioVisual;
+import gui.ShowBooks;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -136,31 +136,31 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 820, Short.MAX_VALUE)
+            .addGap(0, 954, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 811, Short.MAX_VALUE)
+            .addGap(0, 862, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        InsertarLibros il = new InsertarLibros();
+        InsertBook il = new InsertBook();
         this.add(il);
         il.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        InsertarAudioVisuales iav = new InsertarAudioVisuales();
+        InsertAudioVisual iav = new InsertAudioVisual();
         this.add(iav);
        iav.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         try {
-            MostrarLibros ml= new MostrarLibros();
+            ShowBooks ml= new ShowBooks();
             this.add(ml);
             ml.setVisible(true);
         } catch (IOException ex) {
@@ -172,7 +172,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         try {
-            MostrarAudiovisuales audiovisuales = new MostrarAudiovisuales();
+            ShowMostrarAudiovisuales audiovisuales = new ShowMostrarAudiovisuales();
         this.add(audiovisuales);
             audiovisuales.setVisible(true);
         } catch (IOException ex) {
@@ -184,7 +184,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         try {
-            MostrarEstudiantes estudiantes = new MostrarEstudiantes();
+            ShowStudent estudiantes = new ShowStudent();
          this.add(estudiantes);
             estudiantes.setVisible(true);
         } catch (IOException ex) {
@@ -193,13 +193,13 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        InsertarEstudiante insertarEstudiante = new InsertarEstudiante();
+        InsertStudent insertarEstudiante = new InsertStudent();
   this.add(insertarEstudiante);
         insertarEstudiante.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        VerificaEstudiante vericar=new VerificaEstudiante(this);
+        VerificaStudent vericar=new VerificaStudent(this);
         this.add(vericar);
       //  this.remove(jDesktopPane1);
         vericar.setVisible(true);
@@ -212,10 +212,19 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-    ConvalidaDevolucion vericar=new ConvalidaDevolucion(this);
-        this.add(vericar);
-      //  this.remove(jDesktopPane1);
-        vericar.setVisible(true);
+        try {
+            TablaNuevaDevoluciones vericar = null;
+            
+            vericar = new TablaNuevaDevoluciones(this);
+            
+            this.add(vericar);
+            //  this.remove(jDesktopPane1);
+            vericar.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed

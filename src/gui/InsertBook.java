@@ -9,19 +9,19 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import data.ArchivoLibros;
+import data.BookFile;
 import domain.Book;
 
 /**
  *
  * @author Pablo Rojas Martínez
  */
-public class InsertarLibros extends javax.swing.JInternalFrame {
+public class InsertBook extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form InsertarLibros
      */
-    public InsertarLibros() {
+    public InsertBook() {
         initComponents();
     }
 
@@ -51,25 +51,30 @@ public class InsertarLibros extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
 
-        jLabel1.setText("Tipo:");
+        jLabel1.setText("Type");
 
-        jLabel2.setText("Nombre:");
+        jLabel2.setText("Name");
 
-        jLabel3.setText("Cantidad:");
+        jLabel3.setText("Amount");
 
         jLabel5.setText("Area:");
 
         buttonGroup1.add(jRadioFisico);
-        jRadioFisico.setText("Físico");
+        jRadioFisico.setText("Physical");
+        jRadioFisico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioFisicoActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(jRadioDigital);
         jRadioDigital.setText("Digital");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Salud", "Historia", "Geografía", "Ciencia", "Tecnología", "Educación" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Health", "History", "Geography", "Science", "Technology", "Education" }));
 
-        jButton1.setText("Insertar");
+        jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -106,7 +111,7 @@ public class InsertarLibros extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(76, 76, 76)
                         .addComponent(jButton1)))
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,7 +157,7 @@ try {
                 tipo="Digital";
             }
             else{
-                tipo="Físico";
+                tipo="Physical";
             }
             
             
@@ -165,9 +170,9 @@ try {
             int totalDisponibles=Integer.parseInt((String) jComboBox1.getSelectedItem());
             
             Book libro = new Book(tipo,nombre,codigo,cantidad,area,totalDisponibles);
-            ArchivoLibros  archivoLibros= new ArchivoLibros();
-            if(!archivoLibros.validarNombreUnico(nombre)){
-            archivoLibros.guardarLibro(libro);
+            BookFile  archivoLibros= new BookFile();
+            if(!archivoLibros.validateUniqueName(nombre)){
+            archivoLibros.saveBook(libro);
             JOptionPane.showMessageDialog(null, "Libro insertado");
             //System.out.println( libro.toString());
             }
@@ -178,11 +183,15 @@ try {
            jtfNombre.setText("");
         }
         } catch (IOException ex) {
-            Logger.getLogger(InsertarLibros.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertBook.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(InsertarLibros.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertBook.class.getName()).log(Level.SEVERE, null, ex);
         }
                }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jRadioFisicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioFisicoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioFisicoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -5,9 +5,12 @@
  */
 package gui;
 
-import data.ArchivoLibros;
-import domain.Book;
+import data.AudiovisualFile;
+import data.StudentFile;
+import data.BookFile;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -17,17 +20,16 @@ import javax.swing.JOptionPane;
  *
  * @author Pablo Castillo
  */
-public class BuscarCodigoLibro extends javax.swing.JInternalFrame {
+public class SearchBookByName extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form BuscarCodigoLibro
+     * Creates new form SearchBookByName
      */
-    Book libro;
-    String carnet;
     JFrame ventana;
-    public BuscarCodigoLibro(JFrame vent,String carnet) {
-      this.ventana=vent;
-      this.carnet=carnet;
+    String carnet;
+    public SearchBookByName(JFrame vent,String carnet) {
+        this.ventana=vent;
+        this.carnet=carnet;
         initComponents();
     }
 
@@ -44,11 +46,9 @@ public class BuscarCodigoLibro extends javax.swing.JInternalFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        setClosable(true);
+        jLabel1.setText("Book Name:");
 
-        jLabel1.setText("Codigo de Libro");
-
-        jButton1.setText("Aceptar");
+        jButton1.setText("Search");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -62,46 +62,52 @@ public class BuscarCodigoLibro extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(39, 39, 39)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addGap(51, 51, 51))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addContainerGap(220, Short.MAX_VALUE))
+                .addContainerGap(244, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  JOptionPane.showMessageDialog(null, "entro");
+        BookFile archivo=new BookFile();
+        List<String> personaList2 = new ArrayList<String>();
         try {
-           // JOptionPane.showMessageDialog(null,"error espacios en blanco");
-            ArchivoLibros archivo=new ArchivoLibros();
-            archivo.actualizarCantidadDeAudiovi(jTextField1.getText());
-            libro=archivo.obtenerActorNombre2(jTextField1.getText());
-            FechaPrestamoAudioVisual calendario=new FechaPrestamoAudioVisual(ventana, carnet, libro);
-            
-              this.ventana.add(calendario);
-      calendario.setVisible(true);
-      this.dispose();
-            
-            
+            personaList2=archivo.search(jTextField1.getText());
         } catch (IOException ex) {
-            Logger.getLogger(BuscarCodigoLibro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchByNameAudiovisual.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BuscarCodigoLibro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchByNameAudiovisual.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-    }
+            for(int i=0;i<personaList2.size();i++){
+            JOptionPane.showMessageDialog(null,personaList2.get(i));
+            }
+            if(personaList2.size()==0){
+             JOptionPane.showMessageDialog(null,"no existe");
+            }else{
+         DesplegarLibrosNombre ven=new DesplegarLibrosNombre(this.ventana,personaList2,carnet);
+               this.ventana.add(ven);
+        
+            
+            
+      ven.setVisible(true);
+      this.dispose();      
+            }
+            
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

@@ -5,7 +5,7 @@
  */
 package gui;
 
-import data.ArchivoEstudiante;
+import data.StudentFile;
 import domain.Identification;
 import domain.Student;
 import java.io.IOException;
@@ -17,12 +17,12 @@ import javax.swing.JOptionPane;
  *
  * @author Pablo Rojas Martínez
  */
-public class InsertarEstudiante extends javax.swing.JInternalFrame {
+public class InsertStudent extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form InsertarEstudiante
      */
-    public InsertarEstudiante() {
+    public InsertStudent() {
         initComponents();
     }
 
@@ -42,32 +42,32 @@ public class InsertarEstudiante extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jtfNombre = new javax.swing.JTextField();
         jtfApellido = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<String>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
 
-        jLabel1.setText("Nombre:");
+        jLabel1.setText("Name");
 
-        jLabel2.setText("Apellido:");
+        jLabel2.setText("Lastname");
 
-        jLabel3.setText("Carrera:");
+        jLabel3.setText("Career");
 
-        jLabel4.setText("Año:");
+        jLabel4.setText("Year");
 
-        jButton1.setText("Guardar");
+        jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", " " }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", " " }));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Informática", "Agronomía", "Educación" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Computing", "Agronomy", "Education" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,7 +94,7 @@ public class InsertarEstudiante extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(127, 127, 127)
                         .addComponent(jButton1)))
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +125,7 @@ public class InsertarEstudiante extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          try {
-            ArchivoEstudiante archivo = new ArchivoEstudiante();
+            StudentFile archivo = new StudentFile();
             if (jtfNombre.getText().equals("") || jtfApellido.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Error hay espacios en blanco");
             }else{
@@ -145,7 +145,7 @@ public class InsertarEstudiante extends javax.swing.JInternalFrame {
      
             }
         } catch (IOException ex) {
-            Logger.getLogger(InsertarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

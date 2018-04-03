@@ -5,9 +5,9 @@
  */
 package gui;
 
-import data.ArchivoAudioVisuales;
-import data.ArchivoLibros;
-import data.ArchivoPrestamos;
+import data.AudiovisualFile;
+import data.BookFile;
+import data.LoanFile;
 import domain.Loan;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -46,7 +46,7 @@ public class FechaDevolucion extends javax.swing.JInternalFrame {
          
          
         try {
-            ArchivoPrestamos archivo=new ArchivoPrestamos();
+            LoanFile archivo=new LoanFile();
             
             List<Loan> personaList = new ArrayList<Loan>();
             personaList=archivo.arrays();
@@ -80,7 +80,7 @@ public class FechaDevolucion extends javax.swing.JInternalFrame {
          
          
         try {
-            ArchivoPrestamos archivo=new ArchivoPrestamos();
+            LoanFile archivo=new LoanFile();
             
             List<Loan> personaList = new ArrayList<Loan>();
             personaList=archivo.arrays();
@@ -166,13 +166,13 @@ public class FechaDevolucion extends javax.swing.JInternalFrame {
 //        String 
 //        if(tipo.equals("libro")){
 //            try {
-//                ArchivoPrestamos archivo=new ArchivoPrestamos();
-//                ArchivoLibros libros=new ArchivoLibros();
-//                Loan prestamo=archivo.obtenerLibro(jTextField1.getText(),this.carnet,this.tipo);
+//                LoanFile archivo=new LoanFile();
+//                BookFile libros=new BookFile();
+//                Loan prestamo=archivo.getBook(jTextField1.getText(),this.carnet,this.tipo);
 //                JOptionPane.showMessageDialog(null,prestamo);
 //                
 //                if(prestamo!=null){
-//                libros.actualizarCantidadAumentando(prestamo.getBook().getCode());
+//                libros.updateQuantityIncreasing(prestamo.getBook().getCode());
 //                
 //                    archivo.borrarLibro(prestamo.getBook().getCode());
 //                }else{
@@ -186,11 +186,11 @@ public class FechaDevolucion extends javax.swing.JInternalFrame {
 //        
 //        }else if(tipo.equals("audio")){
 //            try {
-//                ArchivoPrestamos archivo=new ArchivoPrestamos();
-//                ArchivoAudioVisuales audio=new ArchivoAudioVisuales();
-//                Loan prestamo=archivo.obtenerLibro(jTextField1.getText(),this.carnet,this.tipo);
+//                LoanFile archivo=new LoanFile();
+//                AudiovisualFile audio=new AudiovisualFile();
+//                Loan prestamo=archivo.getBook(jTextField1.getText(),this.carnet,this.tipo);
 //                JOptionPane.showMessageDialog(null,prestamo);
-//                audio.actualizarCantidadAumentando((prestamo.getAudio().getBrand()));
+//                audio.updateQuantityIncreasing((prestamo.getAudio().getBrand()));
 //                
 //                archivo.borrarAudio(prestamo.getAudio().getBrand());
 //            } catch (IOException ex) {
@@ -205,16 +205,16 @@ public class FechaDevolucion extends javax.swing.JInternalFrame {
         
           if(tipo.equals("libro")){
             try {
-                ArchivoPrestamos archivo=new ArchivoPrestamos();
+                LoanFile archivo=new LoanFile();
               
                 
-                ArchivoLibros libros=new ArchivoLibros();
+                BookFile libros=new BookFile();
                 Loan prestamo=archivo.obtenerLibro(jtfNombre.getText(),this.carnet,this.tipo);
                 JOptionPane.showMessageDialog(null,prestamo);
                 
                 if(prestamo!=null){
                     multasLibros(jtfNombre.getText());
-                libros.actualizarCantidadAumentando(prestamo.getBook().getCode());
+                libros.updateQuantityIncreasing(prestamo.getBook().getCode());
                 
                     archivo.borrarLibro(prestamo.getBook().getCode());
                 }else{
@@ -228,8 +228,8 @@ public class FechaDevolucion extends javax.swing.JInternalFrame {
         
         }else if(tipo.equals("audio")){
             try {
-                ArchivoPrestamos archivo=new ArchivoPrestamos();
-                ArchivoAudioVisuales audio=new ArchivoAudioVisuales();
+                LoanFile archivo=new LoanFile();
+                AudiovisualFile audio=new AudiovisualFile();
                 Loan prestamo=archivo.obtenerLibro(jtfNombre.getText(),this.carnet,this.tipo);
                 JOptionPane.showMessageDialog(null,prestamo);
                 multasAudio(jtfNombre.getText());

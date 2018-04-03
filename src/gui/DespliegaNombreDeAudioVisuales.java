@@ -1,6 +1,6 @@
 package gui;
 
-import data.ArchivoAudioVisuales;
+import data.AudiovisualFile;
 import domain.Audiovisual;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -61,7 +61,7 @@ public class DespliegaNombreDeAudioVisuales extends JInternalFrame implements Ac
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == boton) {
             try {
-                ArchivoAudioVisuales archivo = new ArchivoAudioVisuales();
+                AudiovisualFile archivo = new AudiovisualFile();
                 archivo.actualizarCantidad((String) this.combo.getSelectedItem());
               
                 audiovisual=archivo.obtenerActorNombre((String) this.combo.getSelectedItem());

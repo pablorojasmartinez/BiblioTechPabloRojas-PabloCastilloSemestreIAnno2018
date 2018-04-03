@@ -5,9 +5,9 @@
  */
 package gui;
 
-import data.ArchivoAudioVisuales;
-import data.ArchivoEstudiante;
-import data.ArchivoPrestamos;
+import data.AudiovisualFile;
+import data.StudentFile;
+import data.LoanFile;
 import domain.Audiovisual;
 import domain.Loan;
 import java.io.IOException;
@@ -35,7 +35,7 @@ public class MostrarPrestamos extends JInternalFrame {
     } // constructro
 
     private void init() throws IOException, ClassNotFoundException {
-        ArchivoEstudiante archivo = new ArchivoEstudiante();
+        StudentFile archivo = new StudentFile();
 
         this.dtmModeloPrueba = new DefaultTableModel();
         this.dtmModeloPrueba.addColumn("Libro");
@@ -45,7 +45,7 @@ public class MostrarPrestamos extends JInternalFrame {
         this.dtmModeloPrueba.addColumn("Fecha final");
         this.dtmModeloPrueba.addColumn("Fecha inicio");
 
-        ArchivoPrestamos archi = new ArchivoPrestamos();
+        LoanFile archi = new LoanFile();
         List<Loan> productoList = archi.arrays();
         for (int i = 0; i < productoList.size(); i++) {
             this.dtmModeloPrueba.addRow(new Object[]{productoList.get(i).getBook(), productoList.get(i).getId(), productoList.get(i).getBook(),

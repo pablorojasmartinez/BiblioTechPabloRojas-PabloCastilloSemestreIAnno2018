@@ -5,7 +5,7 @@
  */
 package gui;
 
-import data.ArchivoAudioVisuales;
+import data.AudiovisualFile;
 import domain.Audiovisual;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,12 +18,12 @@ import javax.swing.JOptionPane;
  *
  * @author Pablo Rojas Martínez
  */
-public class InsertarAudioVisuales extends javax.swing.JInternalFrame {
+public class InsertAudioVisual extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form InsertarAudioVisuales
      */
-    public InsertarAudioVisuales() {
+    public InsertAudioVisual() {
         initComponents();
     }
 
@@ -53,19 +53,24 @@ public class InsertarAudioVisuales extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setResizable(true);
 
-        jLabel1.setText("Tipo:");
+        jLabel1.setText("Type");
 
-        jLabel2.setText("Marca");
+        jLabel2.setText("Brand");
 
-        jLabel3.setText("Codigo:");
+        jLabel3.setText("Code");
 
-        jLabel4.setText("Cantidad:");
+        jLabel4.setText("Amount");
 
-        jLabel5.setText("Año Fabricación:");
+        jLabel5.setText("Made Year");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laptop ", "Proyector", "Parlantes", "CD’s", "Dvd’s" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laptop ", "Projector", "Speakers", "CD’s", "Dvd’s" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("Insertar");
+        jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -92,7 +97,7 @@ public class InsertarAudioVisuales extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jtfAño, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -109,7 +114,7 @@ public class InsertarAudioVisuales extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(116, 116, 116)
                         .addComponent(jButton1)))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(172, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -163,7 +168,7 @@ public class InsertarAudioVisuales extends javax.swing.JInternalFrame {
             if(numero==5 ){
                
             Audiovisual audio = new Audiovisual(tipo,nombre,cantidad,disponibles,codigo,anno);
-            ArchivoAudioVisuales archi = new ArchivoAudioVisuales();
+            AudiovisualFile archi = new AudiovisualFile();
              if(!archi.validarCodigoUnico(codigo)){
             archi.guardarAudioVisual(audio);
             JOptionPane.showMessageDialog(null, "Artículo  insertado");
@@ -182,9 +187,9 @@ public class InsertarAudioVisuales extends javax.swing.JInternalFrame {
             }
         }  
         }  catch (IOException ex) {
-            Logger.getLogger(InsertarEstudiante.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertStudent.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(InsertarAudioVisuales.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InsertAudioVisual.class.getName()).log(Level.SEVERE, null, ex);
         }
       
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -192,6 +197,10 @@ public class InsertarAudioVisuales extends javax.swing.JInternalFrame {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

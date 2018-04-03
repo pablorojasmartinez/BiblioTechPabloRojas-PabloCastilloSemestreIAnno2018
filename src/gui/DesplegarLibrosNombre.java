@@ -5,8 +5,8 @@
  */
 package gui;
 
-import data.ArchivoAudioVisuales;
-import data.ArchivoLibros;
+import data.AudiovisualFile;
+import data.BookFile;
 import domain.Book;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -66,11 +66,11 @@ public class DesplegarLibrosNombre extends JInternalFrame implements ActionListe
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == boton) {
             try {
-                ArchivoLibros archivo = new ArchivoLibros();
-                archivo.actualizarCantidad((String) this.combo.getSelectedItem());
+                BookFile archivo = new BookFile();
+                archivo.updateAmountOfBooks((String) this.combo.getSelectedItem());
                 
                 Book libro;
-                libro=archivo.obtenerLibro((String) this.combo.getSelectedItem());
+                libro=archivo.getBook((String) this.combo.getSelectedItem());
                 
                 
                   FechaPrestamoAudioVisual calendario2=new FechaPrestamoAudioVisual(this.ventana,this.carnet,libro);

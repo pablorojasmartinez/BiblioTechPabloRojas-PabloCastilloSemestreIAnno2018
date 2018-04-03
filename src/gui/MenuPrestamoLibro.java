@@ -61,7 +61,7 @@ public class MenuPrestamoLibro extends JInternalFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
       if(ae.getSource()==item1){
-          BuscarCodigoLibro codigo=new BuscarCodigoLibro(this.ventana,carnet);
+          SearchBookCode codigo=new SearchBookCode(this.ventana,carnet);
           this.ventana.add(codigo);
           codigo.setVisible(true);
           this.dispose();
@@ -74,7 +74,7 @@ public class MenuPrestamoLibro extends JInternalFrame implements ActionListener{
 //                  this.dispose();
    
       }else if(ae.getSource()==itemBuscarNombre){
-      BusquedaLibroPorNombre busqueda=new BusquedaLibroPorNombre(this.ventana, carnet);
+      SearchBookByName busqueda=new SearchBookByName(this.ventana, carnet);
       this.ventana.add(busqueda);
       busqueda.setVisible(true);
       this.dispose();

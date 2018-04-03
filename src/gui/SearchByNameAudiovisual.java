@@ -5,7 +5,7 @@
  */
 package gui;
 
-import data.ArchivoAudioVisuales;
+import data.AudiovisualFile;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,14 +18,14 @@ import javax.swing.JOptionPane;
  *
  * @author Pablo Castillo
  */
-public class BuscaPorNombreAudiovisual extends javax.swing.JInternalFrame {
+public class SearchByNameAudiovisual extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form BuscaPorNombreAudiovisual
+     * Creates new form SearchByNameAudiovisual
      */
     JFrame ventana;
     String carnet;
-    public BuscaPorNombreAudiovisual(JFrame fra,String carnet) {
+    public SearchByNameAudiovisual(JFrame fra,String carnet) {
         ventana=fra;
         this.carnet=carnet;
         initComponents();
@@ -46,7 +46,7 @@ public class BuscaPorNombreAudiovisual extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
-        jLabel1.setText("Buscar nombre");
+        jLabel1.setText("Audiovisual Brand:");
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,7 +54,7 @@ public class BuscaPorNombreAudiovisual extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("Aceptar");
+        jButton1.setText("Search");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -66,11 +66,11 @@ public class BuscaPorNombreAudiovisual extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(35, 35, 35)
                 .addComponent(jLabel1)
-                .addGap(55, 55, 55)
+                .addGap(32, 32, 32)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(62, 62, 62))
         );
@@ -94,14 +94,14 @@ public class BuscaPorNombreAudiovisual extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
   
-        ArchivoAudioVisuales archivo=new ArchivoAudioVisuales();
+        AudiovisualFile archivo=new AudiovisualFile();
         List<String> personaList2 = new ArrayList<String>();
         try {
             personaList2=archivo.search(jTextField1.getText());
         } catch (IOException ex) {
-            Logger.getLogger(BuscaPorNombreAudiovisual.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchByNameAudiovisual.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BuscaPorNombreAudiovisual.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchByNameAudiovisual.class.getName()).log(Level.SEVERE, null, ex);
         }
         
             for(int i=0;i<personaList2.size();i++){

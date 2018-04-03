@@ -5,7 +5,7 @@
  */
 package gui;
 
-import data.ArchivoEstudiante;
+import data.StudentFile;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -68,7 +68,7 @@ public class VerificaEstudiante extends JInternalFrame implements ActionListener
           
        
           try {
-              ArchivoEstudiante archi=new ArchivoEstudiante();
+              StudentFile archi=new StudentFile();
               
               boolean result= archi.buscarCarnet(this.campoTexto.getText());
               if(result==true){

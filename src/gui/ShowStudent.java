@@ -6,7 +6,7 @@
 
 package gui;
 
-import data.ArchivoEstudiante;
+import data.StudentFile;
 import domain.Student;
 import java.io.IOException;
 import java.util.List;
@@ -19,11 +19,11 @@ import javax.swing.table.DefaultTableModel;
  * 
  * @author Pablo Rojas Martínez
  */
-public class MostrarEstudiantes extends JInternalFrame{
+public class ShowStudent extends JInternalFrame{
 JTable jtbPrueba;
     DefaultTableModel dtmModeloPrueba;
 
-    public MostrarEstudiantes() throws IOException {
+    public ShowStudent() throws IOException {
         super();
         // this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(800, 800);
@@ -34,14 +34,14 @@ JTable jtbPrueba;
     } // constructro
 
     private void init() throws IOException {
-        ArchivoEstudiante archivo = new ArchivoEstudiante();
+        StudentFile archivo = new StudentFile();
 
         this.dtmModeloPrueba = new DefaultTableModel();
-        this.dtmModeloPrueba.addColumn("Nombre");
-        this.dtmModeloPrueba.addColumn("Apellido");
-        this.dtmModeloPrueba.addColumn("Carnet");
+        this.dtmModeloPrueba.addColumn("Name");
+        this.dtmModeloPrueba.addColumn("Lastname");
+        this.dtmModeloPrueba.addColumn("Identification");
 
-        ArchivoEstudiante archi = new ArchivoEstudiante();
+        StudentFile archi = new StudentFile();
         List<Student> productoList = archi.buscarPorNombreTodos();
         for (int i = 0; i < productoList.size(); i++) {
             this.dtmModeloPrueba.addRow(new Object[]{productoList.get(i).getLastName(), productoList.get(i).getName(), productoList.get(i).getId().getChain()});

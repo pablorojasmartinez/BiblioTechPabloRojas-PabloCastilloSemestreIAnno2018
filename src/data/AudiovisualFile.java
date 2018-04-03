@@ -21,11 +21,11 @@ import javax.swing.JOptionPane;
  *
  * @author Pablo Rojas Martínez
  */
-public class ArchivoAudioVisuales {
+public class AudiovisualFile {
 
     private String path;
 
-    public ArchivoAudioVisuales() {
+    public AudiovisualFile() {
         this.path = "ArchivoAudioVisuales";
     }//const
 
@@ -193,7 +193,7 @@ public class ArchivoAudioVisuales {
         return personaList;
     }//obtenerPersona
 
-    public boolean actualizarCantidadDeAudiovi(int codigo) throws IOException, ClassNotFoundException {
+    public boolean actualizarCantidadDeAudiovirestar(int codigo) throws IOException, ClassNotFoundException {
         File myFile = new File(this.path);
 
         List<Audiovisual> personaList = new ArrayList<Audiovisual>();

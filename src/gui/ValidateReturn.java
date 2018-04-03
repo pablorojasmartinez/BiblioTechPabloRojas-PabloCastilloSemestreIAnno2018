@@ -5,7 +5,7 @@
  */
 package gui;
 
-import data.ArchivoPrestamos;
+import data.LoanFile;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,14 +16,14 @@ import javax.swing.JOptionPane;
  *
  * @author Pablo Castillo
  */
-public class ConvalidaDevolucion extends javax.swing.JInternalFrame {
+public class ValidateReturn extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form ConvalidaDevolucion
+     * Creates new form ValidateReturn
      */
     JFrame ventana;
 
-    public ConvalidaDevolucion(JFrame frame) {
+    public ValidateReturn(JFrame frame) {
         ventana = frame;
         initComponents();
         this.setClosable(true);
@@ -45,9 +45,9 @@ public class ConvalidaDevolucion extends javax.swing.JInternalFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
 
-        jLabel1.setText("Ingrese Carnet");
+        jLabel1.setText("Write your id:");
 
-        jButton1.setText("aceptar");
+        jButton1.setText("Give Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -58,7 +58,7 @@ public class ConvalidaDevolucion extends javax.swing.JInternalFrame {
         jRadioButton1.setText("AudioVisual");
 
         buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Libro");
+        jRadioButton2.setText("Book");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,7 +75,7 @@ public class ConvalidaDevolucion extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addGap(38, 38, 38)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(29, 29, 29))
         );
@@ -100,7 +100,7 @@ public class ConvalidaDevolucion extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
          if(jRadioButton2.isSelected()){
         try {
-            ArchivoPrestamos archivo = new ArchivoPrestamos();
+            LoanFile archivo = new LoanFile();
             boolean verifica = archivo.buscarCarnet(this.jTextField1.getText());
          
 //            String tipo=
@@ -130,14 +130,14 @@ public class ConvalidaDevolucion extends javax.swing.JInternalFrame {
             }
 
         } catch (IOException ex) {
-            Logger.getLogger(ConvalidaDevolucion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ValidateReturn.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ConvalidaDevolucion.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ValidateReturn.class.getName()).log(Level.SEVERE, null, ex);
         }
          }else  if(jRadioButton1.isSelected()){
          
              try {
-                 ArchivoPrestamos archivo = new ArchivoPrestamos();
+                 LoanFile archivo = new LoanFile();
                  boolean verifica = archivo.buscarCarnet(this.jTextField1.getText());
                 if(verifica=true){
                     FechaDevolucion internaPrestamos = new FechaDevolucion(this.ventana,jTextField1.getText(),"audio" );
@@ -146,9 +146,9 @@ public class ConvalidaDevolucion extends javax.swing.JInternalFrame {
                     this.dispose();
                 }
              } catch (IOException ex) {
-                 Logger.getLogger(ConvalidaDevolucion.class.getName()).log(Level.SEVERE, null, ex);
+                 Logger.getLogger(ValidateReturn.class.getName()).log(Level.SEVERE, null, ex);
              } catch (ClassNotFoundException ex) {
-                 Logger.getLogger(ConvalidaDevolucion.class.getName()).log(Level.SEVERE, null, ex);
+                 Logger.getLogger(ValidateReturn.class.getName()).log(Level.SEVERE, null, ex);
              }
          }
     }//GEN-LAST:event_jButton1ActionPerformed

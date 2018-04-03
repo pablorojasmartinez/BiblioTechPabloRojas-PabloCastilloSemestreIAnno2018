@@ -5,7 +5,7 @@
  */
 package gui;
 
-import data.ArchivoPrestamos;
+import data.LoanFile;
 import domain.Audiovisual;
 import domain.Loan;
 import java.io.IOException;
@@ -123,7 +123,7 @@ public class FechasPrestamoLibro extends javax.swing.JInternalFrame {
           if(date1.before(date2)){
               
           
-            ArchivoPrestamos archivo=new ArchivoPrestamos();
+            LoanFile archivo=new LoanFile();
             Loan prestamo=new Loan(date1, date2, carnet, audioVisual, null);
             archivo.guardarLibro(prestamo);
             

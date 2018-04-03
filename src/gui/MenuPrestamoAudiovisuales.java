@@ -55,7 +55,7 @@ public class MenuPrestamoAudiovisuales extends JInternalFrame implements ActionL
     @Override
     public void actionPerformed(ActionEvent ae) {
       if(ae.getSource()==item1){
-      BusquedaporCodigoAudioVisual busqueda=new BusquedaporCodigoAudioVisual(this.ventana,carnet);
+      SearchAudioVisualByCode busqueda=new SearchAudioVisualByCode(this.ventana,carnet);
      this.ventana.add(busqueda);
 
       busqueda.setVisible(true);
@@ -65,7 +65,7 @@ public class MenuPrestamoAudiovisuales extends JInternalFrame implements ActionL
    
       }else if(ae.getSource()==itemBuscarNombre){
       
-          BuscaPorNombreAudiovisual busca=new BuscaPorNombreAudiovisual(this.ventana,carnet);
+          SearchByNameAudiovisual busca=new SearchByNameAudiovisual(this.ventana,carnet);
       
       this.ventana.add(busca);
       busca.setVisible(true);

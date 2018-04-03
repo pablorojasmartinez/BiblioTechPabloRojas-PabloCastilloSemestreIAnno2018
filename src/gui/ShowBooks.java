@@ -11,7 +11,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import data.ArchivoLibros;
+import data.BookFile;
 import domain.Book;
 
 
@@ -19,12 +19,12 @@ import domain.Book;
  *
  * @author Pablo Castillo
  */
-public class MostrarLibros extends JInternalFrame {
+public class ShowBooks extends JInternalFrame {
 
     JTable jtbPrueba;
     DefaultTableModel dtmModeloPrueba;
 
-    public MostrarLibros() throws IOException, ClassNotFoundException {
+    public ShowBooks() throws IOException, ClassNotFoundException {
         super();
         // this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(800, 800);
@@ -34,18 +34,18 @@ public class MostrarLibros extends JInternalFrame {
     } // constructro
 
     private void init() throws IOException, ClassNotFoundException {
-        ArchivoLibros archivo = new ArchivoLibros();
+        BookFile archivo = new BookFile();
 
         this.dtmModeloPrueba = new DefaultTableModel();
-        this.dtmModeloPrueba.addColumn("Tipo");
-        this.dtmModeloPrueba.addColumn("Nombre");
-        this.dtmModeloPrueba.addColumn("Codigo");
+        this.dtmModeloPrueba.addColumn("Type");
+        this.dtmModeloPrueba.addColumn("Name");
+        this.dtmModeloPrueba.addColumn("Code");
         this.dtmModeloPrueba.addColumn("Area");
-        this.dtmModeloPrueba.addColumn("Cantidad Total");
+        this.dtmModeloPrueba.addColumn("Total Amount");
         
-        this.dtmModeloPrueba.addColumn("Disponibles");
+        this.dtmModeloPrueba.addColumn("Availables");
 
-        ArchivoLibros archivoLibros = new ArchivoLibros();
+        BookFile archivoLibros = new BookFile();
         List<Book> listaLibros = archivoLibros.arrays();
         for (int i = 0; i < listaLibros.size(); i++) {
             this.dtmModeloPrueba.addRow(new Object[]{listaLibros.get(i).getType(), listaLibros.get(i).getName(),listaLibros.get(i).getCode(),listaLibros.get(i).getArea(),

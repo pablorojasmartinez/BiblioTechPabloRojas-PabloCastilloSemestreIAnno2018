@@ -5,11 +5,9 @@
  */
 package gui;
 
-import data.ArchivoAudioVisuales;
-import domain.Audiovisual;
+import data.BookFile;
+import domain.Book;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -19,21 +17,18 @@ import javax.swing.JOptionPane;
  *
  * @author Pablo Castillo
  */
-public class BusquedaporCodigoAudioVisual extends javax.swing.JInternalFrame {
+public class SearchBookCode extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form BusquedaporCodigoAudioVisual
+     * Creates new form SearchBookCode
      */
-    JFrame ventana;
-    Audiovisual audio;
+    Book libro;
     String carnet;
-    public BusquedaporCodigoAudioVisual(JFrame frme,String carnet) {
+    JFrame ventana;
+    public SearchBookCode(JFrame vent,String carnet) {
+      this.ventana=vent;
+      this.carnet=carnet;
         initComponents();
-        ventana=frme;
-        this.carnet=carnet;
-       this.setClosable(true);
-       
-       
     }
 
     /**
@@ -49,9 +44,11 @@ public class BusquedaporCodigoAudioVisual extends javax.swing.JInternalFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
-        jLabel1.setText("Buscar por codigo");
+        setClosable(true);
 
-        jButton1.setText("Pedir Libro");
+        jLabel1.setText("Book Code:");
+
+        jButton1.setText("Search");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -65,60 +62,46 @@ public class BusquedaporCodigoAudioVisual extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(39, 39, 39)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(75, 75, 75))
+                .addGap(51, 51, 51))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-     ArchivoAudioVisuales archivo=new ArchivoAudioVisuales();
+  JOptionPane.showMessageDialog(null, "entro");
         try {
-            boolean verificar=archivo.obtenerActorNombreBoolean2(Integer.parseInt(this.jTextField1.getText()));
-             JOptionPane.showMessageDialog(null,verificar);
-//               if(verificar==true){
-               archivo.actualizarCantidadDeAudiovi(Integer.parseInt(this.jTextField1.getText()));
-               
-//               }
-//            JOptionPane.showMessageDialog(null,"el codigo no corresponde a algun material registrado");
+           // JOptionPane.showMessageDialog(null,"error espacios en blanco");
+            BookFile archivo=new BookFile();
+            archivo.updateAmountOfBooks(jTextField1.getText());
+            libro=archivo.searchByCode(jTextField1.getText());
+            FechaPrestamoAudioVisual calendario=new FechaPrestamoAudioVisual(ventana, carnet, libro);
             
-//            List<String> personaList2 = new ArrayList<String>();
-//            personaList2=archivo.search("a");
-//            for(int i=0;i<personaList2.size();i++){
-//            JOptionPane.showMessageDialog(null,personaList2.get(i));
-//            }
-            
-               audio=archivo.obtenerActorNombre2(this.jTextField1.getText());
-               
-               JOptionPane.showMessageDialog(null, audio);
-               
-               
-                 FechasPrestamoLibro calendario=new FechasPrestamoLibro(this.ventana,this.carnet,audio);
-     this.ventana.add(calendario);
+              this.ventana.add(calendario);
       calendario.setVisible(true);
       this.dispose();
-               
+            
             
         } catch (IOException ex) {
-            Logger.getLogger(BusquedaporCodigoAudioVisual.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchBookCode.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(BusquedaporCodigoAudioVisual.class.getName()).log(Level.SEVERE, null, ex);
-        }
-     
+            Logger.getLogger(SearchBookCode.class.getName()).log(Level.SEVERE, null, ex);
+        
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

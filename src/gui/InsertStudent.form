@@ -54,7 +54,7 @@
                       <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="193" max="32767" attributes="0"/>
+              <EmptySpace pref="208" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -91,27 +91,27 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Nombre:"/>
+        <Property name="text" type="java.lang.String" value="Name"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Apellido:"/>
+        <Property name="text" type="java.lang.String" value="Lastname"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Carrera:"/>
+        <Property name="text" type="java.lang.String" value="Career"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="A&#xf1;o:"/>
+        <Property name="text" type="java.lang.String" value="Year"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Guardar"/>
+        <Property name="text" type="java.lang.String" value="Save"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
@@ -147,9 +147,9 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
-            <StringItem index="0" value="Inform&#xe1;tica"/>
-            <StringItem index="1" value="Agronom&#xed;a"/>
-            <StringItem index="2" value="Educaci&#xf3;n"/>
+            <StringItem index="0" value="Computing"/>
+            <StringItem index="1" value="Agronomy"/>
+            <StringItem index="2" value="Education"/>
           </StringArray>
         </Property>
       </Properties>
