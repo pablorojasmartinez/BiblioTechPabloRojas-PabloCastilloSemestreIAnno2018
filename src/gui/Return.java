@@ -114,7 +114,7 @@ public class Return extends javax.swing.JInternalFrame {
         this.dtmModeloPrueba.addColumn("Audiovisual");
         this.dtmModeloPrueba.addColumn("Id");
         this.dtmModeloPrueba.addColumn("Start Date");
-        this.dtmModeloPrueba.addColumn("End Datel");
+        this.dtmModeloPrueba.addColumn("End Date");
         LoanFile loanFile = new LoanFile();
         List<Loan> bookList = loanFile.returnLoanArray();
         for (int i = 0; i < bookList.size(); i++) {

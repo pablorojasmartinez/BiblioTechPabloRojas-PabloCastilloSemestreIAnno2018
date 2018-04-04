@@ -113,7 +113,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Search by name"/>
+        <Property name="text" type="java.lang.String" value="Search by brand"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">

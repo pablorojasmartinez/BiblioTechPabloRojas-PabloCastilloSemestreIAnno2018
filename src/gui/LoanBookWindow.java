@@ -123,9 +123,9 @@ public class LoanBookWindow extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Busqueda por nombre");
+        jLabel1.setText("Search by name");
 
-        jLabel2.setText("Busqueda por codigo");
+        jLabel2.setText("Search by code");
 
         jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {

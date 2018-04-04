@@ -95,10 +95,8 @@ public class StudentFile {
         } else if (estudiante.getId().getCareer().equalsIgnoreCase("Agronomy")) {
             return "A";
         }
-        else if (estudiante.getId().getCareer().equalsIgnoreCase("Education")) {
+        else {
             return "E";
-        }else {
-            return "X";
         }
     }//firstLetter
 

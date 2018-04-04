@@ -121,7 +121,7 @@ public class LoanAudiovisualWindow extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Search by name");
+        jLabel1.setText("Search by brand");
 
         jLabel2.setText("Search by code");
 

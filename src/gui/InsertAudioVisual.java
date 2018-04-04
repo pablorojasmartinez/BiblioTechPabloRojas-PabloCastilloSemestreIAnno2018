@@ -271,6 +271,7 @@ public class InsertAudioVisual extends javax.swing.JInternalFrame {
        String other = jTextField1.getText();
        jComboBox1.addItem(other);
        jComboBox1.repaint();
+       jTextField1.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

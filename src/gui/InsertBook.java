@@ -264,6 +264,7 @@ public class InsertBook extends javax.swing.JInternalFrame {
         String other = jTextField1.getText();
         jComboBox2.addItem(other);
         jComboBox2.repaint();
+        jTextField1.setText("");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
