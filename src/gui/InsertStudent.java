@@ -60,7 +60,7 @@ public class InsertStudent extends javax.swing.JInternalFrame {
 
         jComboBox2.setBackground(new java.awt.Color(65, 132, 31));
         jComboBox2.setForeground(new java.awt.Color(255, 255, 255));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029" }));
 
         jComboBox1.setBackground(new java.awt.Color(65, 132, 31));
         jComboBox1.setForeground(new java.awt.Color(255, 255, 255));

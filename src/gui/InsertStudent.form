@@ -157,7 +157,7 @@
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="10">
+                  <StringArray count="20">
                     <StringItem index="0" value="2010"/>
                     <StringItem index="1" value="2011"/>
                     <StringItem index="2" value="2012"/>
@@ -168,6 +168,16 @@
                     <StringItem index="7" value="2017"/>
                     <StringItem index="8" value="2018"/>
                     <StringItem index="9" value="2019"/>
+                    <StringItem index="10" value="2020"/>
+                    <StringItem index="11" value="2021"/>
+                    <StringItem index="12" value="2022"/>
+                    <StringItem index="13" value="2023"/>
+                    <StringItem index="14" value="2024"/>
+                    <StringItem index="15" value="2025"/>
+                    <StringItem index="16" value="2026"/>
+                    <StringItem index="17" value="2027"/>
+                    <StringItem index="18" value="2028"/>
+                    <StringItem index="19" value="2029"/>
                   </StringArray>
                 </Property>
               </Properties>

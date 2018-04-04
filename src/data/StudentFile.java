@@ -102,23 +102,23 @@ public class StudentFile {
 
     //Este método retorna un número dependiendo del año que haya sido seleccionado.
     public int returnYearNumber(Student estudiante) {
-        if (estudiante.getId().getYear() == 2010) {
+        if (estudiante.getId().getYear() == 2010 || estudiante.getId().getYear() == 2020) {
             return 0;
-        } else if (estudiante.getId().getYear() == 2011) {
+        } else if (estudiante.getId().getYear() == 2011  || estudiante.getId().getYear() == 2021) {
             return 1;
-        } else if (estudiante.getId().getYear() == 2012) {
+        } else if (estudiante.getId().getYear() == 2012 || estudiante.getId().getYear() == 2022) {
             return 2;
-        } else if (estudiante.getId().getYear() == 2013) {
+        } else if (estudiante.getId().getYear() == 2013  || estudiante.getId().getYear() == 2023) {
             return 3;
-        } else if (estudiante.getId().getYear() == 2014) {
+        } else if (estudiante.getId().getYear() == 2014  || estudiante.getId().getYear() == 2024) {
             return 4;
-        } else if (estudiante.getId().getYear() == 2015) {
+        } else if (estudiante.getId().getYear() == 2015  || estudiante.getId().getYear() == 2025) {
             return 5;
-        } else if (estudiante.getId().getYear() == 2016) {
+        } else if (estudiante.getId().getYear() == 2016 || estudiante.getId().getYear() == 2026) {
             return 6;
-        } else if (estudiante.getId().getYear() == 2017) {
+        } else if (estudiante.getId().getYear() == 2017 || estudiante.getId().getYear() == 2027) {
             return 7;
-        } else if (estudiante.getId().getYear() == 2018) {
+        } else if (estudiante.getId().getYear() == 2018  || estudiante.getId().getYear() == 2028) {
             return 8;
         }
         return 9;
