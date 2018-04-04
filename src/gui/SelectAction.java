@@ -18,24 +18,24 @@ import javax.swing.JOptionPane;
  *
  * @author Pablo Castillo
  */
-public class VerificaStudent extends javax.swing.JInternalFrame {
+public class SelectAction extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form VerificaStudent
+     * Creates new form SelectAction
      */
-    JFrame ventanaPrincipal;
-    String carnet;
+    //Attributes
+    JFrame mainWindow;
+    String id;
 
-    public VerificaStudent(JFrame fra) {
-        this.ventanaPrincipal = fra;
-
+    public SelectAction(JFrame frame) {
+        this.mainWindow = frame;
         initComponents();
 
         this.jRadioButton1.setEnabled(false);
         this.jRadioButton2.setEnabled(false);
         this.jButton2.setEnabled(false);
         this.jTextField2.setEnabled(false);
-    }
+    }//constructor
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -55,23 +55,33 @@ public class VerificaStudent extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
 
-        jLabel1.setText("ingrese Carnet");
+        setClosable(true);
 
-        jButton1.setText("Aceptar");
+        jLabel1.setText("Write your id");
+
+        jButton1.setText("Check");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jRadioButton1.setText("libro");
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setText("Book");
 
-        jRadioButton2.setText("AudioVisual");
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("Audiovisual");
 
-        jButton2.setText("Aceptar");
+        jButton2.setText("Select");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
             }
         });
 
@@ -80,9 +90,10 @@ public class VerificaStudent extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jRadioButton1)
@@ -95,11 +106,9 @@ public class VerificaStudent extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30)
-                                .addComponent(jButton1))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(88, Short.MAX_VALUE))
+                                .addComponent(jButton1)))
+                        .addGap(0, 95, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,71 +133,52 @@ public class VerificaStudent extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            StudentFile archi = new StudentFile();
-
-            boolean result = archi.buscarCarnet(this.jTextField1.getText());
+            StudentFile studentFile = new StudentFile();
+            boolean result = studentFile.searchById(this.jTextField1.getText());
             if (result == true) {
-                JOptionPane.showMessageDialog(null, "entro");
-                TipoPtrestamo pedir = new TipoPtrestamo(this.ventanaPrincipal, jTextField1.getText());
-//                  this.ventanaPrincipal.add(pedir);
-//                  pedir.setVisible(true);
-//                  this.dispose();
-                this.carnet=jTextField1.getText();
-                Student student = archi.obtenerEstudiante(this.jTextField1.getText());
-                jTextField2.setText("nombre" + " " + student.getName() + " " + "Apellido" + " " + student.getLastName());
-//            jTextField2.setVisible(true);
+                this.id = jTextField1.getText();
+                Student student = studentFile.getStudent(this.jTextField1.getText());
+                jTextField2.setText("Welcome "+student.getLastName() + " " + student.getName()+", please, select one of the options below");
                 jTextField2.setEditable(false);
-//            this.setFocusable(true);
-//            this.ventanaPrincipal.repaint();
                 this.jRadioButton1.setEnabled(true);
                 this.jRadioButton2.setEnabled(true);
                 this.jButton2.setEnabled(true);
-
             } else {
-                JOptionPane.showMessageDialog(null, "no existe el usuario");
+                jTextField2.setText("Error! The requested user does not exist, please, check the id");
             }
         } catch (IOException ex) {
-            Logger.getLogger(VerificaEstudiante.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(VerificaEstudiante.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      
-         if(jRadioButton2.isSelected()){
-        
-             try {
-                 TablaNueva2 tabla=new TablaNueva2(this.ventanaPrincipal,this.carnet);
-                 ventanaPrincipal.add(tabla);
-                 tabla.setVisible(true);
-                 this.dispose();
-             } catch (IOException ex) {
-                 Logger.getLogger(VerificaStudent.class.getName()).log(Level.SEVERE, null, ex);
-             } catch (ClassNotFoundException ex) {
-                 Logger.getLogger(VerificaStudent.class.getName()).log(Level.SEVERE, null, ex);
-             }
-         }else if(jRadioButton1.isSelected()){
-             try {
-                 //         JOptionPane.showMessageDialog(null, "ingreso");
-//             MenuPrestamoLibro menuBusqueda=new MenuPrestamoLibro(ventanaPrincipal, carnet);
-//             ventanaPrincipal.add(menuBusqueda);
-//             menuBusqueda.setVisible(true);
-//             this.dispose();
-                 
-                 TablaNueva tabla=new TablaNueva(this.ventanaPrincipal,this.carnet);
-                 ventanaPrincipal.add(tabla);
-                 tabla.setVisible(true);
-                 this.dispose();
-             } catch (IOException ex) {
-                 Logger.getLogger(VerificaStudent.class.getName()).log(Level.SEVERE, null, ex);
-             } catch (ClassNotFoundException ex) {
-                 Logger.getLogger(VerificaStudent.class.getName()).log(Level.SEVERE, null, ex);
-             }
-             
-         }
+        if (jRadioButton2.isSelected()) {
+            try {
+                LoanAudiovisualWindow loanWindow = new LoanAudiovisualWindow(this.mainWindow, this.id);
+                mainWindow.add(loanWindow);
+                loanWindow.setVisible(true);
+                this.dispose();
+            } catch (IOException ex) {
+                Logger.getLogger(SelectAction.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(SelectAction.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (jRadioButton1.isSelected()) {
+            try {
+                LoanBookWindow tabla = new LoanBookWindow(this.mainWindow, this.id);
+                mainWindow.add(tabla);
+                tabla.setVisible(true);
+                this.dispose();
+            } catch (IOException ex) {
+                Logger.getLogger(SelectAction.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(SelectAction.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

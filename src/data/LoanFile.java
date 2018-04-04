@@ -5,9 +5,6 @@
  */
 package data;
 
-import domain.Audiovisual;
-import domain.Student;
-import domain.Book;
 import domain.Loan;
 import java.io.File;
 import java.io.FileInputStream;
@@ -26,177 +23,87 @@ import java.util.List;
  */
 public class LoanFile {
 
+    //Attribute
     private String path;
 
     public LoanFile() {
-        this.path = "ArchivoPrestamos";
-    }
+        this.path = "./LoanFile.dat";
+    }//constructor
 
-    public void guardarLibro(Loan libro) throws IOException, ClassNotFoundException {
+    //Este método sirve para crear el archivo donde se guardará el objeto Loan.
+    public void createLoanFile(Loan loan) throws IOException, ClassNotFoundException {
         File myFile = new File(this.path);
-        List<Loan> listaLibros = new ArrayList<Loan>();
-
+        List<Loan> loanList = new ArrayList<Loan>();
         if (myFile.exists()) {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
             Object aux = objectInputStream.readObject();
-            listaLibros = (List<Loan>) aux;
+            loanList = (List<Loan>) aux;
             objectInputStream.close();
-        }//if(myFile.exists())
-
-        listaLibros.add(libro);
+        }//if
+        loanList.add(loan);
         ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(myFile));
-        output.writeUnshared(listaLibros);
+        output.writeUnshared(loanList);
         output.close();
-    }//guardarPersona
+    }//createLoanFile
 
-    public List<Loan> arrays() throws IOException, ClassNotFoundException {
+    //Este método sirve para  devolver un arraylist con el objeto Book 
+    public List<Loan> returnLoanArray() throws IOException, ClassNotFoundException {
         File myFile = new File(this.path);
-
-        List<Loan> personaList = new ArrayList<Loan>();
+        List<Loan> loanList = new ArrayList<Loan>();
         if (myFile.exists()) {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
             Object aux = objectInputStream.readObject();
-            personaList = (List<Loan>) aux;
+            loanList = (List<Loan>) aux;
             objectInputStream.close();
-        }//if(myFile.exists())
+        }//if
+        return loanList;
+    }//returnLoanArray
 
-        return personaList;
-    }//obtenerPersona
-
-    public boolean buscarCarnet(String carnet) throws IOException, ClassNotFoundException {
-        boolean result = false;
-        List<Loan> personaList = new ArrayList<Loan>();
-        personaList = arrays();
-        for (int i = 0; i < personaList.size(); i++) {
-            Loan productoActual = personaList.get(i);
-            if (productoActual != null) {
-                if (productoActual.getId().equals(carnet)) {
-                    result = true;
+    //Este método sirve para borrar el  objeto libro en el  archivo  de préstamo una vez que la devolución fue exitosa.
+    public Loan deleteBook(String code) throws FileNotFoundException, IOException, ClassNotFoundException {
+        File myFile = new File(this.path);
+        List<Loan> loanList = new ArrayList<Loan>();
+        if (myFile.exists()) {
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
+            Object aux = objectInputStream.readObject();
+            loanList = (List<Loan>) aux;
+        }//exists
+        Loan loan = null;
+        for (int i = 0; i < loanList.size(); i++) {
+            if (loanList.get(i).getBook() != null) {
+                if (loanList.get(i).getBook().getCode().equals(code)) {
+                    loan = loanList.remove(i);
                     break;
-                } else {
-                    result = false;
-                }
-
-                //} // if nombre.equals.
-            }//if prodctoActual != null
-        }//for
-        return result;
-
-    }
-    
-    
-    public Loan borrarLibro(String cedula) throws FileNotFoundException, IOException, ClassNotFoundException{
-        File  myFile = new File(this.path);
-        List<Loan> personaList = new ArrayList<Loan>();
-        if(myFile.exists()){
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
-            
-            Object aux= objectInputStream.readObject();
-            personaList=(List<Loan>)aux;
-        }//exists
-        
-        Loan persona =null;
-        
-        for (int i = 0; i < personaList.size(); i++) {
-            if(personaList.get(i).getBook().getCode().equals(cedula)){
-                persona=personaList.remove(i);
-                
-                break;
-            }//if
+                }//if
+            }
         }// for i
-         ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(myFile));
-        output.writeUnshared(personaList);
+        ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(myFile));
+        output.writeUnshared(loanList);
         output.close();
-        
-        return persona;
-    }//borrarPersona
-    
-    public Loan borrarAudio(String cedula) throws FileNotFoundException, IOException, ClassNotFoundException{
-        File  myFile = new File(this.path);
-        List<Loan> personaList = new ArrayList<Loan>();
-        if(myFile.exists()){
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
-            
-            Object aux= objectInputStream.readObject();
-            personaList=(List<Loan>)aux;
-        }//exists
-        
-        Loan persona =null;
-        
-        for (int i = 0; i < personaList.size(); i++) {
-            if(personaList.get(i).getAudio().getBrand().equals(cedula)){
-                persona=personaList.remove(i);
-                
-                break;
-            }//if
-        }// for i
-         ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(myFile));
-        output.writeUnshared(personaList);
-        output.close();
-        
-        return persona;
-    }//borrarPersona
+        return loan;
+    }//deleleLoan
 
-    public Loan obtenerActorNombre2(String codigo, String carnet) throws IOException, ClassNotFoundException {
+    //Este método sirve para borrar el  objeto audiovisual en el  archivo  de préstamo una vez que la devolución fue exitosa.
+    public Loan deleteAudiovisual(String code) throws FileNotFoundException, IOException, ClassNotFoundException {
         File myFile = new File(this.path);
-
-        List<Loan> personaList = new ArrayList<Loan>();
+        List<Loan> loanList = new ArrayList<Loan>();
         if (myFile.exists()) {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
             Object aux = objectInputStream.readObject();
-            personaList = (List<Loan>) aux;
-            objectInputStream.close();
-        }//if(myFile.exists())
-
-        Loan persona = null;
-        for (int i = 0; i < personaList.size(); i++) {
-            if (personaList.get(i).getId() == ((carnet))) {
-                if (personaList.get(i).getBook().getCode() == codigo) {
-                    persona = personaList.get(i);
-                    break;//rompe el for, aquí se pone porque sino retornaría null, porq asi fue inicializado antes
-                }
-            }//if(personaList.get(i).getCedula().equals(codigo))
-        }//for i
-
-        return persona;
-    }//obtenerPersona  
-
-    public Loan obtenerLibro(String nombre, String carnet, String tipo) throws IOException, ClassNotFoundException {
-        File myFile = new File(this.path);
-
-        List<Loan> personaList = new ArrayList<Loan>();
-        if (myFile.exists()) {
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
-            Object aux = objectInputStream.readObject();
-            personaList = (List<Loan>) aux;
-            objectInputStream.close();
-        }//if(myFile.exists())
-
-        Loan persona = null;
-        for (int i = 0; i < personaList.size(); i++) {
-            if (personaList.get(i).getId().equals(carnet)) {
-//                JOptionPane.showMessageDialog(null, personaList.get(i));
-//                JOptionPane.showMessageDialog(null, tipo);
-
-                if (personaList.get(i).getBook() != null) {
-                    if (personaList.get(i).getBook().getName().equals(nombre)) {
-                        persona = personaList.get(i);
-                        break;//rompe el for, aquí se pone porque sino retornaría null, porq asi fue inicializado antes
-                    }
-                    
-                    
-
-                } else {
-                       if (personaList.get(i).getAudio().getBrand().equals(nombre)) {
-                    persona = personaList.get(i);
-                    break;//rompe el for, aquí se pone porque sino retornaría null, porq asi fue inicializado antes
-                       }
-                }
-
-            }//if(personaList.get(i).getCedula().equals(codigo))
-        }//for i
-
-        return persona;
-    }//obtenerPersona
-
+            loanList = (List<Loan>) aux;
+        }
+        Loan loan = null;
+        for (int i = 0; i < loanList.size(); i++) {
+            if (loanList.get(i).getAudio() != null) {
+                if (loanList.get(i).getAudio().getBrand().equals(code)) {
+                    loan = loanList.remove(i);
+                    break;
+                }//if
+            }
+        }// for i
+        ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(myFile));
+        output.writeUnshared(loanList);
+        output.close();
+        return loan;
+    }//deleteAudiovisual
 }

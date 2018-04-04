@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package data;
 
 import domain.Identification;
@@ -16,99 +15,92 @@ import java.util.List;
 //import javax.swing.JOptionPane;
 
 /**
- * 
+ *
  * @author Pablo Rojas Martínez
  */
 public class StudentFile {
- private RandomAccessFile randomAccessFile;
-    private int cantidadRegistros;
+
+    //Attributes
+    private RandomAccessFile randomAccessFile;
+    private int RegSize;
     private int tamRegistro;
     private String path;
 
     public StudentFile() throws IOException {
-
-        this.path = "archivoEstudiante";
+        this.path = "./StudentFile.dat";
         File file = new File(this.path);
         start(file);
+    } //constructor
 
-    } // default
-
+    //Este método crea el archivo del objeto Student
     private void start(File file) throws IOException {
         this.path = file.getPath();
         this.tamRegistro = 140;
-
         if (file.exists() && !file.isFile()) {
-            throw new IOException(file.getName() + " archivo inválido");
+            throw new IOException(file.getName() + " Invalid File");
         } else {
             this.randomAccessFile = new RandomAccessFile(file, "rw");
-            this.cantidadRegistros = (int) Math.ceil((double) this.randomAccessFile.length()
+            this.RegSize = (int) Math.ceil((double) this.randomAccessFile.length()
                     / (double) this.tamRegistro);
         }
-
     } // start
 
-    private boolean insertarProducto(int posicion, Student pelicula) throws IOException {
-
-        if (posicion >= 0 && posicion <= cantidadRegistros) {
-            if (pelicula.size() > this.tamRegistro) {
+    //Este método de tipo boolean inserta un objeto Student en una posición del archivo
+    private boolean insertStudent(int position, Student student) throws IOException {
+        if (position >= 0 && position <= RegSize) {
+            if (student.size() > this.tamRegistro) {
                 return false;
             } else {
-                pelicula.setId(this.crearCarnet(pelicula));
-
-                this.randomAccessFile.seek(posicion * this.tamRegistro);
-                this.randomAccessFile.writeUTF(pelicula.getName());
-                this.randomAccessFile.writeUTF(pelicula.getLastName());
-                this.randomAccessFile.writeUTF(pelicula.getId().getCareer());
-                this.randomAccessFile.writeInt(pelicula.getId().getYear());
-                this.randomAccessFile.writeInt(pelicula.getId().getNumber());
-                this.randomAccessFile.writeUTF(pelicula.getId().getChain());
+                student.setId(this.createId(student));
+                this.randomAccessFile.seek(position * this.tamRegistro);
+                this.randomAccessFile.writeUTF(student.getName());
+                this.randomAccessFile.writeUTF(student.getLastName());
+                this.randomAccessFile.writeUTF(student.getId().getCareer());
+                this.randomAccessFile.writeInt(student.getId().getYear());
+                this.randomAccessFile.writeInt(student.getId().getNumber());
+                this.randomAccessFile.writeUTF(student.getId().getChain());
                 return true;
-            } // if(persona.size()>this.tamRegistro)
+            } // if
         } // if
-
         return false;
-    } // insertarPersona
+    } // insertStudent
 
-    public boolean insertarProducto(Student producto) throws IOException {
+    //Este método retorna el método insertStudent
+    public boolean insertStudent(Student producto) throws IOException {
+        return StudentFile.this.insertStudent(this.RegSize, producto);
+    } // insertStudent
 
-        return insertarProducto(this.cantidadRegistros, producto);
-
-    } // insertarPersona
-
-    public Student obtenerProducto(int posicion) throws IOException {
-        Identification carn = new Identification();
-        if (posicion >= 0 && posicion <= cantidadRegistros) {
-            this.randomAccessFile.seek(posicion * tamRegistro);
-
-            Student pelicula = new Student();
-            pelicula.setLastName(this.randomAccessFile.readUTF());
-            pelicula.setName(this.randomAccessFile.readUTF());
-            carn.setCareer(this.randomAccessFile.readUTF());
-            carn.setYear(this.randomAccessFile.readInt());
-            carn.setNumber(this.randomAccessFile.readInt());
-            carn.setChain(this.randomAccessFile.readUTF());
-            pelicula.setId(carn);
-            return pelicula;
-
+    //Este método devuelve un estudiante que se busca en una posición específica.
+    public Student getStudent(int position) throws IOException {
+        Identification id = new Identification();
+        if (position >= 0 && position <= RegSize) {
+            this.randomAccessFile.seek(position * tamRegistro);
+            Student student = new Student();
+            student.setLastName(this.randomAccessFile.readUTF());
+            student.setName(this.randomAccessFile.readUTF());
+            id.setCareer(this.randomAccessFile.readUTF());
+            id.setYear(this.randomAccessFile.readInt());
+            id.setNumber(this.randomAccessFile.readInt());
+            id.setChain(this.randomAccessFile.readUTF());
+            student.setId(id);
+            return student;
         } // if
-
         return null;
-    } // obtenerPersona
-    
+    } // getStudent
 
-    public String primeraLetra(Student estudiante) {
+    //Este métpdp retorna una letra específica dependiendo del tipo de carrera que se elija
+    public String firstLetter(Student estudiante) {
         if (estudiante.getId().getCareer().equalsIgnoreCase("Computing")) {
             return "C";
-
         } else if (estudiante.getId().getCareer().equalsIgnoreCase("Agronomy")) {
             return "A";
         } else {
             return "E";
         }
+    }//firstLetter
 
-    }
-
-    public int retornaNumerAno(Student estudiante) {
+    //Este método retorna un número dependiendo del año que haya sido seleccionado.
+    public int returnYearNumber(Student estudiante) {
         if (estudiante.getId().getYear() == 2010) {
             return 0;
         } else if (estudiante.getId().getYear() == 2011) {
@@ -129,132 +121,95 @@ public class StudentFile {
             return 8;
         }
         return 9;
+    }// returnYearNumber
 
-    }
-    public int ultimonumero(String primerletra) throws IOException{
-    int ultimoNumero = 0;
-        for(int i=cantidadRegistros-1;i>=0;i--){
-            Student ultimaPosicion = obtenerProducto(i);
-//            JOptionPane.showMessageDialog(null,ultimaPosicion);
-       if(primerletra.equals(ultimaPosicion.getId().getCareer())){
-        ultimoNumero=ultimaPosicion.getId().getNumber()+1;
-        break;
-       }else{
-       ultimoNumero=000;
-       
-       }
-        
+    //Este método busca en el archivo el último carnet ingresado y le suma 1.
+    public int id1(String firstLetter) throws IOException {
+        int lastNumber = 0;
+        for (int i = RegSize - 1; i >= 0; i--) {
+            Student student = StudentFile.this.getStudent(i);
+            if (firstLetter.equals(student.getId().getCareer())) {
+                lastNumber = student.getId().getNumber() + 1;
+                break;
+            } else {
+                lastNumber = 000;
+            }
         }
-        return ultimoNumero;
-    }
+        return lastNumber;
+    }//id1
 
-    public String numero(int numero){
-    String num2 = null;
-    if(numero<1){
-    
-    num2="000";
-    }
-        
-    else if(numero<10){
-        num2="00"+numero;
-        
-    }else if(numero<100){
-   num2= "0"+numero;
-    }else{
-    num2+=numero;
-    }
-    return num2;
-    }
-    
-    
-    public Identification crearCarnet(Student estudiante) throws IOException {
-        Identification carnet = null;
-        int numUltimo;
-          String primeraLetr = null ;
-        Student ultimaPosicion = obtenerProducto(cantidadRegistros - 1);
-        int cont = 0;
-        for (int i = 0; i < cantidadRegistros; i++) {
-            cont++;
+    //Este método asigna la cantidad de ceros al contador del carnet del estudiante
+    public String id2(int number) {
+        String num2 = null;
+        if (number < 1) {
+            num2 = "000";
+        } else if (number < 10) {
+            num2 = "00" + number;
+        } else if (number < 100) {
+            num2 = "0" + number;
+        } else {
+            num2 += number;
         }
-     
-           // cantidadRegistros += 1;
-      
-            //numUltimo = (ultimaPosicion.getId().getNumber()) + 001;
-            //cantidadRegistros += 1;
-    
-         numUltimo=ultimonumero(estudiante.getId().getCareer());
-String numer=numero(numUltimo);
-//cantidadRegistros+=1;
-   
+        return num2;
+    }//id2
 
-            primeraLetr  = primeraLetra(estudiante);
-        int num = (retornaNumerAno(estudiante));
-        String todoCarnet = primeraLetr + num + numer;
-        carnet = new Identification(estudiante.getId().getCareer(), estudiante.getId().getYear(), numUltimo, todoCarnet);
-        return carnet;
-    }
+    //Este método sirve para unificar todos los componentes de la identificacion 
+    public Identification createId(Student student) throws IOException {
+        Identification id = null;
+        int lastNumber;
+        String firtsLetter = null;
+        Student lastPosition = StudentFile.this.getStudent(RegSize - 1);
+        int count = 0;
+        for (int i = 0; i < RegSize; i++) {
+            count++;
+        }
+        lastNumber = id1(student.getId().getCareer());
+        String numer = id2(lastNumber);
+        firtsLetter = firstLetter(student);
+        int num = (returnYearNumber(student));
+        String todoCarnet = firtsLetter + num + numer;
+        id = new Identification(student.getId().getCareer(), student.getId().getYear(), lastNumber, todoCarnet);
+        return id;
+    }//createId
 
-    public List<Student> buscarPorNombreTodos() throws IOException {
-        List<Student> productoList = new ArrayList<Student>();
-        for (int i = 0; i < this.cantidadRegistros; i++) {
-            Student productoActual = obtenerProducto(i);
-            if (productoActual != null) {
-                // if (nombre.equals(productoActual.getTitulo())) {
-                //System.out.println("");
-                productoList.add(productoActual);
-                //} // if nombre.equals.
-            }//if prodctoActual != null
+    //Este método retorna una lista con todos los objetos Student
+    public List<Student> searchStudent() throws IOException {
+        List<Student> studentList = new ArrayList<Student>();
+        for (int i = 0; i < this.RegSize; i++) {
+            Student student = StudentFile.this.getStudent(i);
+            if (student != null) {
+                studentList.add(student);
+            }//if 
         }//for
-        return productoList;
-    }//buscarPorNombreTodos
-    
-    
+        return studentList;
+    }//searchStudent
 
-    
-    
-        public boolean buscarCarnet(String carnet) throws IOException{
+    //Este métdo sirve para buscar el estudiante mediante su carnet
+    public boolean searchById(String id) throws IOException {
         //boolean result = false;  
-        for (int i = 0; i < this.cantidadRegistros; i++) {
-            Student productoActual = obtenerProducto(i);
-            if (productoActual != null) {
-               if(productoActual.getId().getChain().equals(carnet)){
-                  
-               //result=true;
-//               }else{
-//               //result=false;
-//               }
-                
-   return true;
- 
-                //} // if nombre.equals.
-            }//if prodctoActual != null
-              
-        }//for
-     //   return result;
-       
-    }
-     return false;
-    }
-        
-        
-        public Student obtenerEstudiante(String carnet) throws IOException{
-            Student student = null;
-        for (int i = 0; i < this.cantidadRegistros; i++) {
-            Student productoActual = obtenerProducto(i);
-            if (productoActual != null) {
-               if(productoActual.getId().getChain().equals(carnet)){
-                  
-               //result=true;
-//               }else{
-//               //result=false;
-//               }
-               student=productoActual;
-  
-               }
-            
-            }}
-
-        return student;
+        for (int i = 0; i < this.RegSize; i++) {
+            Student currentStudent = StudentFile.this.getStudent(i);
+            if (currentStudent != null) {
+                if (currentStudent.getId().getChain().equals(id)) {
+                    return true;
+                }//if 
+            }//for
         }
-        
+        return false;
+    }//searchById
+
+    //Este método sirve para  retornar un estudiante con un id específico.
+    public Student getStudent(String carnet) throws IOException {
+        Student student = null;
+        for (int i = 0; i < this.RegSize; i++) {
+            Student currentStudent = StudentFile.this.getStudent(i);
+            if (currentStudent != null) {
+                if (currentStudent.getId().getChain().equals(carnet)) {
+                    student = currentStudent;
+                }
+            }
+        }
+        return student;
+    }//getStudent
+
 }

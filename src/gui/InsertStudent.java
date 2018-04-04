@@ -23,6 +23,7 @@ public class InsertStudent extends javax.swing.JInternalFrame {
      * Creates new form InsertarEstudiante
      */
     public InsertStudent() {
+        this.setTitle("Student");
         initComponents();
     }
 
@@ -42,8 +43,8 @@ public class InsertStudent extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jtfNombre = new javax.swing.JTextField();
         jtfApellido = new javax.swing.JTextField();
-        jComboBox2 = new javax.swing.JComboBox<String>();
-        jComboBox1 = new javax.swing.JComboBox<String>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setClosable(true);
         setIconifiable(true);
@@ -65,9 +66,9 @@ public class InsertStudent extends javax.swing.JInternalFrame {
             }
         });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", " " }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019" }));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Computing", "Agronomy", "Education" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Computing", "Agronomy", "Education" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,25 +125,20 @@ public class InsertStudent extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         try {
-            StudentFile archivo = new StudentFile();
+        try {
+            StudentFile studentFile = new StudentFile();
             if (jtfNombre.getText().equals("") || jtfApellido.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Error hay espacios en blanco");
-            }else{
-              
-                String prueba=(String) this.jComboBox2.getSelectedItem();
-                Identification carnet=new Identification((String)this.jComboBox1.getSelectedItem(),Integer.parseInt(prueba) , 0, "a");
-                Student estudiante=new Student(this.jtfNombre.getText(), this.jtfApellido.getText(), carnet);
-                
-               // JOptionPane.showMessageDialog(null,estudiante);
-                boolean verifica= archivo.insertarProducto(estudiante);
-                
-                if(verifica==true){
-                    JOptionPane.showMessageDialog(null,"Se agregó exitosamente");
+                JOptionPane.showMessageDialog(null, "There are blank spaces");
+            } else {
+                String prueba = (String) this.jComboBox2.getSelectedItem();
+                Identification id = new Identification((String) this.jComboBox1.getSelectedItem(), Integer.parseInt(prueba), 0, "a");
+                Student student = new Student(this.jtfNombre.getText(), this.jtfApellido.getText(), id);
+                boolean verifica = studentFile.insertStudent(student);
+                if (verifica == true) {
+                    JOptionPane.showMessageDialog(null, "Student successfully inserted");
                     jtfNombre.setText("");
                     jtfApellido.setText("");
                 }
-     
             }
         } catch (IOException ex) {
             Logger.getLogger(InsertStudent.class.getName()).log(Level.SEVERE, null, ex);

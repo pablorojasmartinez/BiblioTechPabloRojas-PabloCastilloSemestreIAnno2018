@@ -14,49 +14,44 @@ import javax.swing.table.DefaultTableModel;
 import data.BookFile;
 import domain.Book;
 
-
 /**
  *
  * @author Pablo Castillo
  */
 public class ShowBooks extends JInternalFrame {
 
-    JTable jtbPrueba;
+    //Attributes
+    JTable jTable;
     DefaultTableModel dtmModeloPrueba;
 
     public ShowBooks() throws IOException, ClassNotFoundException {
         super();
-        // this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(800, 800);
+        this.setTitle("List of Books");
         init();
         this.setVisible(true);
         this.setClosable(true);
-    } // constructro
+    } // constructor
 
     private void init() throws IOException, ClassNotFoundException {
-        BookFile archivo = new BookFile();
-
+        BookFile bookFile = new BookFile();
         this.dtmModeloPrueba = new DefaultTableModel();
         this.dtmModeloPrueba.addColumn("Type");
         this.dtmModeloPrueba.addColumn("Name");
         this.dtmModeloPrueba.addColumn("Code");
         this.dtmModeloPrueba.addColumn("Area");
         this.dtmModeloPrueba.addColumn("Total Amount");
-        
         this.dtmModeloPrueba.addColumn("Availables");
 
-        BookFile archivoLibros = new BookFile();
-        List<Book> listaLibros = archivoLibros.arrays();
-        for (int i = 0; i < listaLibros.size(); i++) {
-            this.dtmModeloPrueba.addRow(new Object[]{listaLibros.get(i).getType(), listaLibros.get(i).getName(),listaLibros.get(i).getCode(),listaLibros.get(i).getArea(),
-            listaLibros.get(i).getAmount(),listaLibros.get(i).getAvailable()});
+        BookFile bookFile1 = new BookFile();
+        List<Book> bookList = bookFile1.returnBookArray();
+        for (int i = 0; i < bookList.size(); i++) {
+            this.dtmModeloPrueba.addRow(new Object[]{bookList.get(i).getType(), bookList.get(i).getName(), bookList.get(i).getCode(), bookList.get(i).getArea(),
+                bookList.get(i).getAmount(), bookList.get(i).getAvailable()});
         }
-
-        this.jtbPrueba = new JTable(this.dtmModeloPrueba);
-
-        JScrollPane scrollPane = new JScrollPane(this.jtbPrueba);
+        this.jTable = new JTable(this.dtmModeloPrueba);
+        JScrollPane scrollPane = new JScrollPane(this.jTable);
         this.getContentPane().add(scrollPane);
-        System.out.println("tablajava.Ventana.init()");
     } // init
 
 }

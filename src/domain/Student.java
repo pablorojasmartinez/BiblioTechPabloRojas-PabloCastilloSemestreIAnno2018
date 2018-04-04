@@ -9,7 +9,7 @@ package domain;
  *
  * @author Pablo Rojas Martínez
  */
-public class Student extends Person{
+public class Student extends Person {
 
     //attributes
     private Identification id;
@@ -19,12 +19,11 @@ public class Student extends Person{
     }//Constructor
 
     public Student(String name, String lastName, Identification id) {
-        super(name,lastName);
+        super(name, lastName);
         this.id = id;
     }//Overload constructor
 
     //Set && Get
-
     public Identification getId() {
         return id;
     }
@@ -41,6 +40,6 @@ public class Student extends Person{
 //toString
     @Override
     public String toString() {
-        return "Student:" + super.toString()+ " Identification=" + id + '}';
+        return "Student:" + super.toString() + " Identification=" + id + '}';
     }
 }

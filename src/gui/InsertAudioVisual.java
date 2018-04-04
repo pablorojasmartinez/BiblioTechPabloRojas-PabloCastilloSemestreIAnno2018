@@ -8,8 +8,6 @@ package gui;
 import data.AudiovisualFile;
 import domain.Audiovisual;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -24,6 +22,7 @@ public class InsertAudioVisual extends javax.swing.JInternalFrame {
      * Creates new form InsertarAudioVisuales
      */
     public InsertAudioVisual() {
+        this.setTitle("Audiovisual");
         initComponents();
     }
 
@@ -148,50 +147,41 @@ public class InsertAudioVisual extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
-            
-             
         try {
-            
             if (jtfNombre.getText().equals("") || jtfAño.getText().equals("") || jtfCodigo.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Error! hay espacios en blanco");
-            }else{
-            
-            String tipo=(String)jComboBox1.getSelectedItem();
-            String nombre=jtfNombre.getText();
-            int cantidad= Integer.parseInt((String) this.jComboBox2.getSelectedItem());;
-            int disponibles= Integer.parseInt((String) this.jComboBox2.getSelectedItem());;
-            int codigo=Integer.parseInt(this.jtfCodigo.getText());
-            int anno=Integer.parseInt(this.jtfAño.getText());
-            int numero= String.valueOf(codigo).length();
-       
-            if(numero==5 ){
-               
-            Audiovisual audio = new Audiovisual(tipo,nombre,cantidad,disponibles,codigo,anno);
-            AudiovisualFile archi = new AudiovisualFile();
-             if(!archi.validarCodigoUnico(codigo)){
-            archi.guardarAudioVisual(audio);
-            JOptionPane.showMessageDialog(null, "Artículo  insertado");
-            jtfAño.setText("");
-            jtfCodigo.setText("");
-            jtfNombre.setText("");
+            } else {
+                String type = (String) jComboBox1.getSelectedItem();
+                String name = jtfNombre.getText();
+                int amount = Integer.parseInt((String) this.jComboBox2.getSelectedItem());;
+                int available = Integer.parseInt((String) this.jComboBox2.getSelectedItem());;
+                int code = Integer.parseInt(this.jtfCodigo.getText());
+                int year = Integer.parseInt(this.jtfAño.getText());
+                int number = String.valueOf(code).length();
+                if (number == 5) {
+                    Audiovisual audio = new Audiovisual(type, name, amount, available, code, year);
+                    AudiovisualFile audiovisualFile = new AudiovisualFile();
+                    if (!audiovisualFile.validateUniqueCode(code)) {
+                        audiovisualFile.createAudiovisualFile(audio);
+                        JOptionPane.showMessageDialog(null, "Successfully inserted material");
+                        jtfAño.setText("");
+                        jtfCodigo.setText("");
+                        jtfNombre.setText("");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Error! The code already exists");
+                        jtfCodigo.setText("");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error! The code must be 5 digits");
+                    jtfCodigo.setText("");
+                }
             }
-            else{
-                JOptionPane.showMessageDialog(null, "El código ya existe");
-                jtfCodigo.setText("");
-            }
-            }
-              else{
-                JOptionPane.showMessageDialog(null, "El código debe de ser de 5 digitos");
-                jtfCodigo.setText("");
-            }
-        }  
-        }  catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(InsertStudent.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(InsertAudioVisual.class.getName()).log(Level.SEVERE, null, ex);
         }
-      
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed

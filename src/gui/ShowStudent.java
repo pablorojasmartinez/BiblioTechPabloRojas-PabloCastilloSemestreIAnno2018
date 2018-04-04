@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package gui;
 
 import data.StudentFile;
@@ -16,41 +15,38 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * 
+ *
  * @author Pablo Rojas Martínez
  */
-public class ShowStudent extends JInternalFrame{
-JTable jtbPrueba;
+public class ShowStudent extends JInternalFrame {
+
+    //Attributes
+    JTable jTable;
     DefaultTableModel dtmModeloPrueba;
 
     public ShowStudent() throws IOException {
         super();
-        // this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(800, 800);
+        this.setTitle("List of Students");
         init();
         this.setVisible(true);
         this.setClosable(true);
-        
-    } // constructro
+    } // constructor
 
     private void init() throws IOException {
-        StudentFile archivo = new StudentFile();
-
+        StudentFile studentFile = new StudentFile();
         this.dtmModeloPrueba = new DefaultTableModel();
         this.dtmModeloPrueba.addColumn("Name");
         this.dtmModeloPrueba.addColumn("Lastname");
         this.dtmModeloPrueba.addColumn("Identification");
 
-        StudentFile archi = new StudentFile();
-        List<Student> productoList = archi.buscarPorNombreTodos();
-        for (int i = 0; i < productoList.size(); i++) {
-            this.dtmModeloPrueba.addRow(new Object[]{productoList.get(i).getLastName(), productoList.get(i).getName(), productoList.get(i).getId().getChain()});
+        StudentFile studentFile1 = new StudentFile();
+        List<Student> studentList = studentFile1.searchStudent();
+        for (int i = 0; i < studentList.size(); i++) {
+            this.dtmModeloPrueba.addRow(new Object[]{studentList.get(i).getLastName(), studentList.get(i).getName(), studentList.get(i).getId().getChain()});
         }
-
-        this.jtbPrueba = new JTable(this.dtmModeloPrueba);
-
-        JScrollPane scrollPane = new JScrollPane(this.jtbPrueba);
+        this.jTable = new JTable(this.dtmModeloPrueba);
+        JScrollPane scrollPane = new JScrollPane(this.jTable);
         this.getContentPane().add(scrollPane);
-        System.out.println("tablajava.Ventana.init()");
     } // init
 }

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package gui;
 
 import data.AudiovisualFile;
@@ -17,45 +16,42 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * 
+ *
  * @author Pablo Rojas Martínez
  */
-public class ShowMostrarAudiovisuales extends JInternalFrame {
-JTable jtbPrueba;
+public class ShowAudiovisuales extends JInternalFrame {
+    //Attributes
+
+    JTable jTable;
     DefaultTableModel dtmModeloPrueba;
 
-    public ShowMostrarAudiovisuales() throws IOException, ClassNotFoundException {
+    public ShowAudiovisuales() throws IOException, ClassNotFoundException {
         super();
         // this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(800, 800);
+        this.setTitle("List of Audiovisuals");
         init();
         this.setVisible(true);
         this.setClosable(true);
-    } // constructro
+    } // constructor
 
     private void init() throws IOException, ClassNotFoundException {
-        StudentFile archivo = new StudentFile();
-
+        StudentFile studentFile = new StudentFile();
         this.dtmModeloPrueba = new DefaultTableModel();
         this.dtmModeloPrueba.addColumn("Type");
         this.dtmModeloPrueba.addColumn("Code");
         this.dtmModeloPrueba.addColumn("Brand");
-        
         this.dtmModeloPrueba.addColumn("Made Year");
         this.dtmModeloPrueba.addColumn("Total Amount");
         this.dtmModeloPrueba.addColumn("Availables");
-
-        AudiovisualFile archi = new AudiovisualFile();
-        List<Audiovisual> productoList = archi.arrays();
-        for (int i = 0; i < productoList.size(); i++) {
-            this.dtmModeloPrueba.addRow(new Object[]{productoList.get(i).getType(), productoList.get(i).getCode(), productoList.get(i).getBrand(),productoList.get(i).getMadeYear(),
-                productoList.get(i).amount(),productoList.get(i).getAvailable()});
+        AudiovisualFile audiovisualFile = new AudiovisualFile();
+        List<Audiovisual> audiovisualList = audiovisualFile.returnAudioVisualArray();
+        for (int i = 0; i < audiovisualList.size(); i++) {
+            this.dtmModeloPrueba.addRow(new Object[]{audiovisualList.get(i).getType(), audiovisualList.get(i).getCode(), audiovisualList.get(i).getBrand(), audiovisualList.get(i).getMadeYear(),
+                audiovisualList.get(i).amount(), audiovisualList.get(i).getAvailable()});
         }
-
-        this.jtbPrueba = new JTable(this.dtmModeloPrueba);
-
-        JScrollPane scrollPane = new JScrollPane(this.jtbPrueba);
+        this.jTable = new JTable(this.dtmModeloPrueba);
+        JScrollPane scrollPane = new JScrollPane(this.jTable);
         this.getContentPane().add(scrollPane);
-        System.out.println("tablajava.Ventana.init()");
     } // init
 }

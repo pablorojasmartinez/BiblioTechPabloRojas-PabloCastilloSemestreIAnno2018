@@ -22,6 +22,7 @@ public class InsertBook extends javax.swing.JInternalFrame {
      * Creates new form InsertarLibros
      */
     public InsertBook() {
+        this.setTitle("Book");
         initComponents();
     }
 
@@ -142,46 +143,33 @@ public class InsertBook extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-try {
-             if (jtfNombre.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Error hay espacios en blanco");
-            }else{
-            
-            int numero= (int) (Math.random()*999+100);
-            
-            int numero2=(int)(Math.random()*999+100);
-            String codigo="978-9930-"+String.valueOf(numero2)+"-"+String.valueOf(numero);
-            
-            String tipo;
-            if(jRadioDigital.isSelected()){
-                tipo="Digital";
+        try {
+            if (jtfNombre.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Error! There are blank spaces");
+            } else {
+                int number = (int) (Math.random() * 999 + 100);
+                int number2 = (int) (Math.random() * 999 + 100);
+                String code = "978-9930-" + String.valueOf(number2) + "-" + String.valueOf(number);
+                String type;
+                if (jRadioDigital.isSelected()) {
+                    type = "Digital";
+                } else {
+                    type = "Physical";
+                }
+                String name = jtfNombre.getText();
+                int amount = Integer.parseInt((String) jComboBox1.getSelectedItem());
+                String area = (String) jComboBox2.getSelectedItem();
+                int available = Integer.parseInt((String) jComboBox1.getSelectedItem());
+                Book book = new Book(type, name, code, amount, area, available);
+                BookFile bookFile = new BookFile();
+                if (!bookFile.validateUniqueName(name)) {
+                    bookFile.createBookFile(book);
+                    JOptionPane.showMessageDialog(null, "Successfully inserted book");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Error! Repeated name");
+                }
+                jtfNombre.setText("");
             }
-            else{
-                tipo="Physical";
-            }
-            
-            
-            String nombre = jtfNombre.getText();
-            
-            int cantidad = Integer.parseInt((String) jComboBox1.getSelectedItem());
-            
-            String area=(String)jComboBox2.getSelectedItem();
-            
-            int totalDisponibles=Integer.parseInt((String) jComboBox1.getSelectedItem());
-            
-            Book libro = new Book(tipo,nombre,codigo,cantidad,area,totalDisponibles);
-            BookFile  archivoLibros= new BookFile();
-            if(!archivoLibros.validateUniqueName(nombre)){
-            archivoLibros.saveBook(libro);
-            JOptionPane.showMessageDialog(null, "Libro insertado");
-            //System.out.println( libro.toString());
-            }
-            else{
-                 JOptionPane.showMessageDialog(null, "Nombre repetido");
-            }
-             
-           jtfNombre.setText("");
-        }
         } catch (IOException ex) {
             Logger.getLogger(InsertBook.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {

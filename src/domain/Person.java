@@ -10,20 +10,22 @@ package domain;
  * @author Pablo Castillo
  */
 public class Person {
-    
+
+    //Attributes
     private String name;
     private String lastname;
 
     public Person(String name, String lastname) {
         this.name = name;
         this.lastname = lastname;
-    }
+    }//overload constructor
 
     public Person() {
         this.name = "";
         this.lastname = "";
-    }
+    }//constructor
 
+    // Sets && Gets
     public String getName() {
         return name;
     }
@@ -39,19 +41,15 @@ public class Person {
     public void setLastName(String lastname) {
         this.lastname = lastname;
     }
-    
-    public int size(){
-        return name.length()*2 + lastname.length()*2 +40;
-    }
 
+    public int size() {
+        return name.length() * 2 + lastname.length() * 2 + 40;
+    }//Size
+
+    //toString
     @Override
     public String toString() {
         return "Person{" + "name=" + name + ", lastname=" + lastname + '}';
-    }
-    
-    
+    }//toString
 
-    
-    
-    
 }

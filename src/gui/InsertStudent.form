@@ -124,7 +124,7 @@
     <Component class="javax.swing.JComboBox" name="jComboBox2">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="11">
+          <StringArray count="10">
             <StringItem index="0" value="2010"/>
             <StringItem index="1" value="2011"/>
             <StringItem index="2" value="2012"/>
@@ -135,7 +135,6 @@
             <StringItem index="7" value="2017"/>
             <StringItem index="8" value="2018"/>
             <StringItem index="9" value="2019"/>
-            <StringItem index="10" value=" "/>
           </StringArray>
         </Property>
       </Properties>

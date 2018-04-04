@@ -6,7 +6,6 @@
 package data;
 
 import domain.Audiovisual;
-import domain.Book;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -23,359 +22,122 @@ import javax.swing.JOptionPane;
  */
 public class AudiovisualFile {
 
+    //Attribute
     private String path;
 
     public AudiovisualFile() {
-        this.path = "ArchivoAudioVisuales";
-    }//const
+        this.path = "./AudiovisualFile.dat";
+    }//constuctor
 
-    public void guardarAudioVisual(Audiovisual actor) throws IOException, ClassNotFoundException {
+    //Este método sirve para crear el archivo donde se guardará el objeto Audiovisual.
+    public void createAudiovisualFile(Audiovisual audiovisual) throws IOException, ClassNotFoundException {
         File myFile = new File(this.path);
-        List<Audiovisual> personaList = new ArrayList<Audiovisual>();
-
+        List<Audiovisual> audiovisualList = new ArrayList<Audiovisual>();
         if (myFile.exists()) {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
             Object aux = objectInputStream.readObject();
-            personaList = (List<Audiovisual>) aux;
+            audiovisualList = (List<Audiovisual>) aux;
             objectInputStream.close();
-        }//if(myFile.exists())
-
-        personaList.add(actor);
+        }//if
+        audiovisualList.add(audiovisual);
         ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(myFile));
-        output.writeUnshared(personaList);
+        output.writeUnshared(audiovisualList);
         output.close();
-    }//guardarPersona
-    
-    
-    public boolean validarCodigoUnico(int cedula) throws IOException, ClassNotFoundException {
-        File myFile = new File(this.path);
+    }//createAudiovisualFile
 
-        List<Audiovisual> personaList = new ArrayList<Audiovisual>();
+    //Este método sirve para validar que el código sea único en el archivo
+    public boolean validateUniqueCode(int code) throws IOException, ClassNotFoundException {
+        File myFile = new File(this.path);
+        List<Audiovisual> audiovisualList = new ArrayList<Audiovisual>();
         if (myFile.exists()) {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
             Object aux = objectInputStream.readObject();
-            personaList = (List<Audiovisual>) aux;
+            audiovisualList = (List<Audiovisual>) aux;
             objectInputStream.close();
-        }//if(myFile.exists())
-
-        Audiovisual persona = null;
-        for (int i = 0; i < personaList.size(); i++) {
-            if (personaList.get(i).getCode()==cedula) {
-                persona = personaList.get(i);
-                return true;//rompe el for, aquí se pone porque sino retornaría null, porq asi fue inicializado antes
-            }//if(personaList.get(i).getCedula().equals(cedula))
-        }//for i
-
+        }//if
+        Audiovisual audiovisual = null;
+        for (int i = 0; i < audiovisualList.size(); i++) {
+            if (audiovisualList.get(i).getCode() == code) {
+                audiovisual = audiovisualList.get(i);
+                return true;
+            }//if
+        }//for
         return false;
-    }//obtenerPersona
-    
+    }//validateUniqueCode
 
-    public Audiovisual obtenerActorNombre(String nombre) throws IOException, ClassNotFoundException {
+    //Este método sirve para  devolver un arraylist con el objeto Audiovisual 
+    public List<Audiovisual> returnAudioVisualArray() throws IOException, ClassNotFoundException {
         File myFile = new File(this.path);
-
-        List<Audiovisual> personaList = new ArrayList<Audiovisual>();
+        List<Audiovisual> audiovisualList = new ArrayList<Audiovisual>();
         if (myFile.exists()) {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
             Object aux = objectInputStream.readObject();
-            personaList = (List<Audiovisual>) aux;
+            audiovisualList = (List<Audiovisual>) aux;
             objectInputStream.close();
-        }//if(myFile.exists())
+        }//
+        return audiovisualList;
+    }//returnArray
 
-        Audiovisual persona = null;
-        for (int i = 0; i < personaList.size(); i++) {
-            if (personaList.get(i).getBrand().equals(nombre)) {
-                persona = personaList.get(i);
-                break;//rompe el for, aquí se pone porque sino retornaría null, porq asi fue inicializado antes
-            }//if(personaList.get(i).getCedula().equals(codigo))
-        }//for i
-
-        return persona;
-    }//obtenerPersona
-//    
-    public boolean obtenerActorNombreBoolean(Audiovisual codigo) throws IOException, ClassNotFoundException {
+    //Este método sirve para hacer el préstamo del material audiovisual, si la variable código que recibe por parámetros
+    // es igual a la variable código que trae el arrayList se restará una unidad a la variable disponible, lo cual significa
+    //que el préstamo fue realizado.
+    public boolean lendAudiovisual(int code) throws IOException, ClassNotFoundException {
         File myFile = new File(this.path);
-
-        List<Audiovisual> personaList = new ArrayList<Audiovisual>();
+        List<Audiovisual> audiovisualList = new ArrayList<Audiovisual>();
         if (myFile.exists()) {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
             Object aux = objectInputStream.readObject();
-            personaList = (List<Audiovisual>) aux;
+            audiovisualList = (List<Audiovisual>) aux;
             objectInputStream.close();
-        }//if(myFile.exists())
-        boolean prueba = true;
-        Audiovisual persona = null;
-        for (int i = 0; i < personaList.size(); i++) {
-//            JOptionPane.showMessageDialog(null,personaList.get(i).getCode());
-//            if(personaList.size()==0){
-//                    prueba=false;
-//                guardarAudioVisual(codigo);
-//            }
-            if (personaList.get(i).getCode() == (codigo.getCode())) {
-                // persona = personaList.get(i);
-                prueba = true;
-                //return true;//rompe el for, aquí se pone porque sino retornaría null, porq asi fue inicializado antes
-            } else {
-                prueba = false;
-                //return false;
-            }//if(personaList.get(i).getCedula().equals(codigo))
-        }//for i
-        return prueba;
-
-    }//obtenerPersona
-
-    public boolean obtenerActorNombreBoolean2(int codigo) throws IOException, ClassNotFoundException {
-        File myFile = new File(this.path);
-
-        List<Audiovisual> personaList = new ArrayList<Audiovisual>();
-        if (myFile.exists()) {
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
-            Object aux = objectInputStream.readObject();
-            personaList = (List<Audiovisual>) aux;
-            objectInputStream.close();
-        }//if(myFile.exists())
-        boolean prueba = true;
-        Audiovisual persona = null;
-        for (int i = 0; i < personaList.size(); i++) {
-
-            if (personaList.get(i).getCode() == codigo) {
-                // persona = personaList.get(i);
-                prueba = true;
-                //return true;//rompe el for, aquí se pone porque sino retornaría null, porq asi fue inicializado antes
-            } else {
-                prueba = false;
-                //return false;
-            }//if(personaList.get(i).getCedula().equals(codigo))
-        }//for i
-        return prueba;
-
-    }//obtenerPersona
-
-//    
-//    
-//    public boolean actualizarActor(Actor actor) throws IOException, ClassNotFoundException {
-//        File myFile = new File(this.path);
-//
-//        List<Actor> personaList = new ArrayList<Actor>();
-//        if (myFile.exists()) {
-//            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
-//            Object aux = objectInputStream.readObject();
-//            personaList = (List<Actor>) aux;
-//            objectInputStream.close();
-//        }//if(myFile.exists())
-//
-//        Actor persona = null;
-//        for (int i = 0; i < personaList.size(); i++) {
-//            if (personaList.get(i).getIdActor().equals(actor.getIdActor())) {
-//                persona = personaList.get(i);
-//                personaList.set(i, actor);
-//                //rompe el for, aquí se pone porque sino retornaría null, porq asi fue inicializado antes
-//            }//if(personaList.get(i).getCedula().equals(cedula))
-//        }//for i
-//
-//        ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(myFile));
-//        output.writeUnshared(personaList);
-//        output.close();
-//        
-//        return true;
-//    }//obtenerPersona
-//    
-    public List<Audiovisual> arrays() throws IOException, ClassNotFoundException {
-        File myFile = new File(this.path);
-
-        List<Audiovisual> personaList = new ArrayList<Audiovisual>();
-        if (myFile.exists()) {
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
-            Object aux = objectInputStream.readObject();
-            personaList = (List<Audiovisual>) aux;
-            objectInputStream.close();
-        }//if(myFile.exists())
-
-        return personaList;
-    }//obtenerPersona
-
-    public boolean actualizarCantidadDeAudiovirestar(int codigo) throws IOException, ClassNotFoundException {
-        File myFile = new File(this.path);
-
-        List<Audiovisual> personaList = new ArrayList<Audiovisual>();
-        if (myFile.exists()) {
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
-            Object aux = objectInputStream.readObject();
-            personaList = (List<Audiovisual>) aux;
-            objectInputStream.close();
-        }//if(myFile.exists())
-
-        Audiovisual persona = null;
-        for (int i = 0; i < personaList.size(); i++) {
-            if (personaList.get(i).getCode() == (codigo)) {
-                if (personaList.get(i).getAvailable() == 0) {
-                    JOptionPane.showMessageDialog(null, "En este momento el material no esta disponible");
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "audiovisual pedido exitosamente");
-                    persona = personaList.get(i);
-                    int canti = persona.getAvailable() - 1;
-                    persona.setAvailable(canti);
-                    personaList.set(i, persona);
-                }
-                //rompe el for, aquí se pone porque sino retornaría null, porq asi fue inicializado antes
-            } else {
-                JOptionPane.showMessageDialog(null, "el codigo no corresponde a ningun audivisual registrado");
-
-            }
-
-//if(personaList.get(i).getCedula().equals(cedula))
-        }//for i
-
-        ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(myFile));
-        output.writeUnshared(personaList);
-        output.close();
-
-        return true;
-    }//obtenerPersona
-
-   
-    public ArrayList<String> search(String text) throws IOException, ClassNotFoundException {
-        boolean verificar = false;
-        boolean verifica2 = false;
-        List<Audiovisual> personaList = new ArrayList<Audiovisual>();
-        List<String> personaList2 = new ArrayList<String>();
-        String vect[];
-        personaList = arrays();
-        String letra1 = null, letra2 = null;
-        for (int i = 0; i < personaList.size(); i++) {
-            
-            if (text.equalsIgnoreCase(personaList.get(i).getBrand())) {
-                personaList2.add(personaList.get(i).getBrand());
-            } else if (text.length() <= (personaList.get(i).getBrand()).length()) {
-                for (int j = 0; j < text.length(); j++) {
-                    letra1 += text.charAt(j);
-                    letra2 += personaList.get(i).getBrand().charAt(j);
-                    if (letra1.equalsIgnoreCase(letra2)) {
-                        // JOptionPane.showMessageDialog(null, text.length());
-                        verificar = true;
-                        
-                    } else {
-                        verificar = false;
-                        break;
-                    }
-                    
-                }
-                if (verificar == true) {
-                    personaList2.add(personaList.get(i).getBrand());
-                }
-                //JOptionPane.showMessageDialog(null, "no existe el articulo");
-            }
-//         if(verificar=false){
-//          personaList2.add(personaList.get(i).getBrand());   
-//         }
-
         }
-        
-        return (ArrayList<String>) personaList2;
-        
-    }//fsearch
-    
-    public boolean actualizarCantidad(String nombre) throws IOException, ClassNotFoundException {
-        File myFile = new File(this.path);
-
-        List<Audiovisual> personaList = new ArrayList<Audiovisual>();
-        if (myFile.exists()) {
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
-            Object aux = objectInputStream.readObject();
-            personaList = (List<Audiovisual>) aux;
-            objectInputStream.close();
-        }//if(myFile.exists())
-
-        Audiovisual persona = null;
-        for (int i = 0; i < personaList.size(); i++) {
-            if (personaList.get(i).getBrand().equals(nombre)) {
-                if (personaList.get(i).getAvailable() == 0) {
-                  //  JOptionPane.showMessageDialog(null, "En este momento el material no esta disponible");
-
+        Audiovisual audiovisual = null;
+        for (int i = 0; i < audiovisualList.size(); i++) {
+            if (audiovisualList.get(i).getCode() == (code)) {
+                if (audiovisualList.get(i).getAvailable() == 0) {
+                 JOptionPane.showMessageDialog(null, "At this time the requested material is not available");
                 } else {
-                  //  JOptionPane.showMessageDialog(null, "audiovisual pedido exitosamente");
-                    persona = personaList.get(i);
-                    int canti = persona.getAvailable() - 1;
-                    persona.setAvailable(canti);
-                    personaList.set(i, persona);
+                    JOptionPane.showMessageDialog(null, "Material successfully requested");
+                    audiovisual = audiovisualList.get(i);
+                    int amount = audiovisual.getAvailable() - 1;
+                    audiovisual.setAvailable(amount);
+                    audiovisualList.set(i, audiovisual);
                 }
-                //rompe el for, aquí se pone porque sino retornaría null, porq asi fue inicializado antes
             } else {
-               // JOptionPane.showMessageDialog(null, "el codigo no corresponde a ningun audivisual registrado");
-
+                //JOptionPane.showMessageDialog(null, "The code does not correspond to any registered audiovisual");
             }
-
-//if(personaList.get(i).getCedula().equals(cedula))
-        }//for i
-
+        }//for 
         ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(myFile));
-        output.writeUnshared(personaList);
+        output.writeUnshared(audiovisualList);
         output.close();
-
         return true;
-    }//obtenerPersona
+    }//lendAudiovisual
 
-    
-     public Audiovisual obtenerActorNombre2(String codigo) throws IOException, ClassNotFoundException {
+    // Este método sirve para devolver el audiovisual que fue prestado, si la variable marca que recibe por parámetros
+    // es igual a la variable marca que trae el arraylist entonces se suma una unidad a la variable disponible
+    public boolean returnAudiovisual(String brand) throws IOException, ClassNotFoundException {
         File myFile = new File(this.path);
-
-        List<Audiovisual> personaList = new ArrayList<Audiovisual>();
+        List<Audiovisual> audiovisualList = new ArrayList<Audiovisual>();
         if (myFile.exists()) {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
             Object aux = objectInputStream.readObject();
-            personaList = (List<Audiovisual>) aux;
+            audiovisualList = (List<Audiovisual>) aux;
             objectInputStream.close();
-        }//if(myFile.exists())
-
-        Audiovisual persona = null;
-        for (int i = 0; i < personaList.size(); i++) {
-            if (personaList.get(i).getCode()==(Integer.parseInt(codigo))) {
-                persona = personaList.get(i);
-                break;//rompe el for, aquí se pone porque sino retornaría null, porq asi fue inicializado antes
-            }//if(personaList.get(i).getCedula().equals(codigo))
-        }//for i
-
-        return persona;
-    }//obtenerPersona
-//    
-    
- public boolean actualizarCantidadAumentando(String marca) throws IOException, ClassNotFoundException {
-        File myFile = new File(this.path);
-
-        List<Audiovisual> personaList = new ArrayList<Audiovisual>();
-        if (myFile.exists()) {
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(myFile));
-            Object aux = objectInputStream.readObject();
-            personaList = (List<Audiovisual>) aux;
-            objectInputStream.close();
-        }//if(myFile.exists())
-
-        Audiovisual persona = null;
-        for (int i = 0; i < personaList.size(); i++) {
-            if (personaList.get(i).getBrand().equals(marca)) {
-                if (personaList.get(i).getAvailable()== 0) {
-                   // JOptionPane.showMessageDialog(null, "En este momento el material no esta disponible");
-
+        }//if
+        Audiovisual audiovisual = null;
+        for (int i = 0; i < audiovisualList.size(); i++) {
+            if (audiovisualList.get(i).getBrand().equals(brand)) {
+                if (audiovisualList.get(i).getAvailable() == 0) {
                 } else {
-                    //JOptionPane.showMessageDialog(null, "audio pedido exitosamente");
-                    persona = personaList.get(i);
-                    int canti = persona.getAvailable() + 1;
-                    persona.setAvailable(canti);
-                    personaList.set(i, persona);
+                    audiovisual = audiovisualList.get(i);
+                    int amount = audiovisual.getAvailable() + 1;
+                    audiovisual.setAvailable(amount);
+                    audiovisualList.set(i, audiovisual);
                 }
-                //rompe el for, aquí se pone porque sino retornaría null, porq asi fue inicializado antes
-            } else {
-               // JOptionPane.showMessageDialog(null, "el codigo no corresponde a ningun audivisual registrado");
-
             }
-
-//if(personaList.get(i).getCedula().equals(cedula))
-        }//for i
-
+        }//for 
         ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(myFile));
-        output.writeUnshared(personaList);
+        output.writeUnshared(audiovisualList);
         output.close();
-
         return true;
-    }//obtenerPersona   
+    }//returnAudiovisual  
 }
